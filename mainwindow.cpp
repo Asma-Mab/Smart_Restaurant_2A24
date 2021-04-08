@@ -12,21 +12,20 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->CIN->setValidator (new QIntValidator(0,999999999, this));
-    ui->cinsupp->setValidator (new QIntValidator(0,999999999, this));
-    ui->ref->setValidator (new QIntValidator(0,999999999, this));
-    ui->refsupp->setValidator (new QIntValidator(0,999999999, this));
+
+
+
+    ui->CIN->setValidator (new QIntValidator(0,99999999, this));
+    ui->cinsupp->setValidator (new QIntValidator(0,99999999, this));
+    ui->ref->setValidator (new QIntValidator(0,99999999, this));
+    ui->refsupp->setValidator (new QIntValidator(0,99999999, this));
 
     ui->table_clients->setModel(C.afficher());
     ui->table_commande->setModel(C1.afficher());
-
-   /* QLineEdit *edit = new QLineEdit(this);
-
-    // the edit lineedit will only accept integers between 100 and 999
-    edit->setValidator(validator);*/
+    }
 
 
-}
+
 
 MainWindow::~MainWindow()
 {
@@ -64,7 +63,7 @@ void MainWindow::on_pushButton_2_clicked()
      {
          if(C.modifier(ui->comboBox->currentText().toInt(),ui->nummodif->text().toInt(),ui->nommodif->text(),ui->prenommodif->text(),ui->adressemodif->text(),ui->emailmodif->text()))
          {
-             //refresh combobox + tableau
+             //refresh tableau
              ui->table_clients->setModel(C.afficher());}
 
              //message
@@ -109,9 +108,9 @@ void MainWindow::on_pushButton_clicked()
 
 
     commande C1(designation, qte, ref, montant, PrixUnit);
-    bool test1=C1.ajouter_commande();
+    bool test=C1.ajouter_commande();
     QMessageBox msgBox;
-    if(test1)
+    if(test)
       {
       msgBox.setText("ajout avec succée");
       ui->table_commande->setModel(C1.afficher());
@@ -191,7 +190,7 @@ void MainWindow::on_pushButton_6_clicked()
     {
         if(C1.modifier(ui->PrixUnitmodif->text().toInt(),ui->montantmodif->text().toInt(),ui->quantitemodif->text().toInt(),ui->comboBox_2->currentText().toInt(),ui->designationmodif->text()))
         {
-            //refresh combobox + tableau
+            //refresh tableau
             ui->table_commande->setModel(C1.afficher());}
 
             //message

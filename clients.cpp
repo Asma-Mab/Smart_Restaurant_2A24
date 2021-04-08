@@ -84,12 +84,12 @@ QSqlQueryModel * clients::trie_az()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from clients order by nom asc");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("num"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
+model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
 return model;
 }
 
@@ -99,12 +99,12 @@ QSqlQueryModel * clients::trie_CIN()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from clients order by CIN desc");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("num"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
+model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
 return model;
 }
 
@@ -114,12 +114,12 @@ QSqlQueryModel * clients::trie_num()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from clients order by num desc");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("num"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
+model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
 return model;
 }
 QSqlQueryModel * clients::rechercher(QString res)
@@ -127,12 +127,12 @@ QSqlQueryModel * clients::rechercher(QString res)
 
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from clients where ref ='"+res+"'");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("num"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
+model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
 return model;
 }
 

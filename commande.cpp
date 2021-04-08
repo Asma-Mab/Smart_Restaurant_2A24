@@ -80,11 +80,11 @@ QSqlQueryModel * commande::trie_az()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from commande order by designation");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
 return model;
 }
 
@@ -94,11 +94,11 @@ QSqlQueryModel * commande::trie_qte()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from commande order by qte");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
 return model;
 }
 
@@ -108,11 +108,11 @@ QSqlQueryModel * commande::trie_mont()
 {
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("select * from commande order by montant");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
 return model;
 }
 QSqlQueryModel * commande::rechercher(QString res)
@@ -120,11 +120,11 @@ QSqlQueryModel * commande::rechercher(QString res)
 
 QSqlQueryModel * model=new QSqlQueryModel();
 model->setQuery("SELECT * from commande where ref ='"+res+"'");
-model->setHeaderData(0,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
+model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
+model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
+model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
 return model;
 }
 
