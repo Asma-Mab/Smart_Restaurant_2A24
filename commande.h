@@ -13,7 +13,7 @@
             int ref,qte,PrixUnit,montant;
 
         public:
-            commande();
+            commande(){}
             commande(QString,int,int,int,int);
 
             QString get_designation(){return designation;}
@@ -30,12 +30,14 @@
 
             bool ajouter_commande();
             QSqlQueryModel * afficher();
-            bool supprimer(int);
-            bool update_commande();
+            bool supprimer_commande(int);
+            bool modifier(int,int,int,int,QString);
             QSqlQueryModel * rechercher(QString);
             QSqlQueryModel * trie_az();
             QSqlQueryModel * trie_qte();
             QSqlQueryModel * trie_mont();
+            QSqlQueryModel * remplircomboreser();
+            QSqlQuery request(QString);
 
 
 };
