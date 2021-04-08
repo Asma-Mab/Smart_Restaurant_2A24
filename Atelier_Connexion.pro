@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql
+QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -26,16 +27,21 @@ CONFIG += c++11
 
 SOURCES += \
     employe.cpp \
+    mail.cpp \
         main.cpp \
-        mainwindow.cpp \
     connection.cpp \
-    poste.cpp
+    mainwindow.cpp \
+    poste.cpp \
+    smtp.cpp
 
 HEADERS += \
     employe.h \
+    mail.h \
+    mainwindow.h \
         mainwindow.h \
     connection.h \
-    poste.h
+    poste.h \
+    smtp.h
 
 FORMS += \
         mainwindow.ui

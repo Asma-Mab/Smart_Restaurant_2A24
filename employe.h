@@ -11,14 +11,14 @@ class employe
     int id;
     QString prenom;
     QString nom;
-    QDate date_naiss;
     QString sexe;
+    QDate date_naiss;
     int id_poste;
 
 public:
     employe();
     ~employe();
-    employe(int,QString,QString,QDate,QString,int);
+    employe(int,QString,QString,QString,QDate,int);
 
     int getid();
     QString getprenom();

@@ -8,12 +8,12 @@ employe::employe()
     this->date_naiss=date_naiss.currentDate();
     this->sexe="";
 }
-employe::employe(int id,QString nom,QString prenom,QDate date_naiss,QString sexe,int id_post){
+employe::employe(int id,QString prenom,QString nom,QString sexe,QDate date_naiss,int id_post){
     this->id=id;
-    this->nom=nom;
     this->prenom=prenom;
-    this->date_naiss=date_naiss;
+    this->nom=nom;
     this->sexe=sexe;
+    this->date_naiss=date_naiss;
     this->id_poste=id_post;
 }
 employe::~employe()
@@ -29,11 +29,11 @@ QString employe::getprenom(){
 QString employe::getnom(){
     return nom;
 }
-QDate employe::getdate_naiss(){
-    return date_naiss;
-}
 QString employe::getsexe(){
     return sexe;
+}
+QDate employe::getdate_naiss(){
+    return date_naiss;
 }
 int employe::getid_poste(){
     return id_poste;
@@ -43,21 +43,21 @@ int employe::getid_poste(){
 void employe::setid(int id){
     this->id=id;
 }
-void employe::setnom(QString nom){
-    this->nom=nom;
-}
 void employe::setprenom(QString prenom){
     this->prenom=prenom;
 }
-void employe::setdate_naiss(QDate date_naiss){
-    this->date_naiss=date_naiss;
+void employe::setnom(QString nom){
+    this->nom=nom;
 }
 void employe::setsexe(QString sexe){
     this->sexe=sexe;
 }
-void employe::setid_poste(int id_post){
-    this->id_poste=id_poste;
+void employe::setdate_naiss(QDate date_naiss){
+    this->date_naiss=date_naiss;
 }
+/*void employe::setid_poste(int id_post){
+    this->id_poste=id_poste;
+}*/
 
 bool employe::ajouter(){
     QSqlQuery query;
