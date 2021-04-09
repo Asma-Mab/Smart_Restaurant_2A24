@@ -52,9 +52,9 @@ bool clients::modifier (int CIN, int num, QString nom, QString prenom , QString 
     QString res5= QString::number(num);
 
     query.prepare("UPDATE clients SET nom=:nom,prenom=:prenom,adresse=:adresse,num=:num WHERE CIN =:res");
-    query.bindValue(":CIN",res);
-    query.bindValue(":prenom",nom);
-    query.bindValue(":nom",prenom);
+    query.bindValue(":res",res);
+    query.bindValue(":nom",nom);
+    query.bindValue(":prenom",prenom);
     query.bindValue(":adresse",adresse);
     query.bindValue(":email",email);
     query.bindValue(":num",res5);
@@ -71,9 +71,9 @@ bool clients::supprimer(int CIN)
 
     {
     QSqlQuery query;
-    QString res = QString::number(CIN);
+   /* QString res = QString::number(CIN);*/
     query.prepare("Delete from CLIENTS where CIN= :CIN");
-    query.bindValue(":CIN",res);
+    query.bindValue(":CIN",CIN);
     return query.exec();
     }
 

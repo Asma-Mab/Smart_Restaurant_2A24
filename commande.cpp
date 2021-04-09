@@ -68,9 +68,9 @@ return    query.exec();
 bool commande::supprimer_commande(int ref)
 {
 QSqlQuery query;
-QString res = QString::number(ref);
+/*QString res = QString::number(ref);*/
 query.prepare("Delete from commande where ref= :ref");
-query.bindValue(":ref",res);
+query.bindValue(":ref",ref);
 return query.exec();
 }
 
