@@ -45,7 +45,7 @@ void MainWindow::on_ajoute_e_clicked()
 
     /******************************/
     QMediaPlayer * bulletsound = new QMediaPlayer();
-    bulletsound->setMedia(QUrl::fromLocalFile("C:/Users/chaab/Desktop/button.wav"));
+    bulletsound->setMedia(QUrl::fromLocalFile("C:/Users/Desktop/button.wav"));
     if (bulletsound->state() == QMediaPlayer::PlayingState){
         bulletsound->setPosition(0);
     }
@@ -54,7 +54,7 @@ void MainWindow::on_ajoute_e_clicked()
     }
 
 
-    employe e(ui->id_e->text().toInt(),ui->nom_e->text(),ui->prenom_e->text(),ui->date_naiss_e->date(),ui->sexe_e->currentText(),ui->poste_e->text(),ui->comboBox_iddepartement->currentText().toInt());
+    employe e(ui->id_e->text().toInt(),ui->nom_e->text(),ui->prenom_e->text(),ui->sexe_e->currentText(),ui->date_naiss_e->date(),ui->comboBox_iddepartement->currentText().toInt());
     bool test=e.ajouter();
     if(test){
         QMessageBox::information(nullptr, QObject::tr("Employe"),
@@ -97,7 +97,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    employe e(ui->id_e->text().toInt(),ui->nom_e->text(),ui->prenom_e->text(),ui->date_naiss_e->date(),ui->sexe_e->currentText(),ui->poste_e->text(),ui->comboBox_iddepartement->currentText().toInt());
+    employe e(ui->id_e->text().toInt(),ui->nom_e->text(),ui->prenom_e->text(),ui->sexe_e->currentText(),ui->date_naiss_e->date(),ui->comboBox_iddepartement->currentText().toInt());
     bool test=e.modifier(ui->id_e->text().toInt());
     if(test){
         QMessageBox::information(nullptr, QObject::tr("Employe"),
@@ -121,24 +121,24 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_ajout_dep_clicked()
 {
-    departement d(ui->id_ch->text().toInt(),ui->nom_ch->text(),ui->date_ch->date(),ui->nombre_ch->text().toInt());
-    bool test=d.ajouter();
+    poste d(ui->id_ch->text().toInt(),ui->nom_ch->text(),ui->date_ch->text().toInt(),ui->nombre_ch->text().toInt());
+    bool test=d.ajouter(); //v
     if(test){
-        QMessageBox::information(nullptr, QObject::tr("Departement"),
-                    QObject::tr("Departement ajouté.\n"
+        QMessageBox::information(nullptr, QObject::tr("Poste"),
+                    QObject::tr("Poste ajouté.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
         ui->table_depart->setModel(tmpdep.afficher());
         ui->id_ch->setText("");
         ui->nom_ch->setText("");
-        ui->date_ch->setDate(QDate(2000,01,01));
+        ui->date_ch->setText("");
         ui->nombre_ch->setText("");
 
         ui->comboBox_iddepartement->clear();
-        ui->comboBox_iddepartement->addItems(tmpdep.listDepartement());
+        ui->comboBox_iddepartement->addItems(tmpdep.listPoste());
 
     }
     else{
-        QMessageBox::critical(nullptr, QObject::tr("Departement"),
+        QMessageBox::critical(nullptr, QObject::tr("Poste"),
                     QObject::tr("Erreur!\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
     }
@@ -149,21 +149,21 @@ void MainWindow::on_ajout_dep_clicked()
     ui->table_e->setModel(tmpemploye.afficher());
     ui->table_depart->setModel(tmpdep.afficher());
     ui->clear();
-    ui->addItems(tmpdep.listDepartement());
+    ui->addItems(tmpdep.listPoste());
 }*/
 
 void MainWindow::on_supp_dep_clicked()
 {
     bool test =tmpdep.supprimer(ui->id_ch->text().toInt());
     if(test){
-        QMessageBox::information(nullptr, QObject::tr("Departement"),
-                    QObject::tr("departement suppriméé.\n"
+        QMessageBox::information(nullptr, QObject::tr("Poste"),
+                    QObject::tr("Poste suppriméé.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
         ui->table_depart->setModel(tmpdep.afficher());
          ui->id_ch->setText("");
     }
     else{
-        QMessageBox::critical(nullptr, QObject::tr("Departement"),
+        QMessageBox::critical(nullptr, QObject::tr("Poste"),
                     QObject::tr("Erreur!\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
     }
@@ -171,20 +171,20 @@ void MainWindow::on_supp_dep_clicked()
 
 void MainWindow::on_modif_dep_clicked()
 {
-    departement d(ui->id_ch->text().toInt(),ui->nom_ch->text(),ui->date_ch->date(),ui->nombre_ch->text().toInt());
+    poste d(ui->id_ch->text().toInt(),ui->nom_ch->text(),ui->date_ch->text().toInt(),ui->nombre_ch->text().toInt());
     bool test=d.modifier(ui->id_ch->text().toInt());
     if(test){
-        QMessageBox::information(nullptr, QObject::tr("Departement"),
-                    QObject::tr("departement modifié.\n"
+        QMessageBox::information(nullptr, QObject::tr("Poste"),
+                    QObject::tr("Poste modifié.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
         ui->table_depart->setModel(tmpdep.afficher());
         ui->id_ch->setText("");
         ui->nom_ch->setText("");
-        ui->date_ch->setDate(QDate(2000,01,01));
+        ui->date_ch->setText("");
         ui->nombre_ch->setText("");
     }
     else{
-        QMessageBox::critical(nullptr, QObject::tr("Departement "),
+        QMessageBox::critical(nullptr, QObject::tr("Poste "),
                     QObject::tr("Erreur!\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
     }
@@ -240,7 +240,7 @@ void MainWindow::on_id_e_textChanged(const QString &arg1)
     ui->prenom_e->setText(e.getprenom());
     ui->date_naiss_e->setDate(e.getdate_naiss());
 
-    ui->poste_e->setText(e.getposte());
+    //ui->poste_e->setText(e.getposte());
 }
 
 void MainWindow::on_radioButton_clicked()
@@ -250,10 +250,10 @@ void MainWindow::on_radioButton_clicked()
 
 void MainWindow::on_id_ch_textChanged(const QString &arg1)
 {
-    departement d=tmpdep.trouver(ui->id_ch->text().toInt());
-    ui->nom_ch->setText(d.getnom());
-    ui->date_ch->setDate(d.getdate_cr());
-    ui->nombre_ch->setText(QString::number(d.getnombre_emp()));
+    poste d=tmpdep.trouver(ui->id_ch->text().toInt());
+    ui->nom_ch->setText(d.gettype());
+    ui->date_ch->setText(QString::number(d.getsalaire()));
+    ui->nombre_ch->setText(QString::number(d.getnb_heures()));
 }
 
 
@@ -300,18 +300,18 @@ void MainWindow::on_envoyer_mail_clicked()
 
 void MainWindow::on_radiotri_date_c_2_clicked()
 {
-    ui->table_depart->setModel(tmpdep.tridate_cr());
+    ui->table_depart->setModel(tmpdep.trisalaire());
 
 }
 
 void MainWindow::on_radiotri_nom_dep_clicked()
 {
-   ui->table_depart->setModel(tmpdep.trinom());
+   ui->table_depart->setModel(tmpdep.tritype());
 }
 
 void MainWindow::on_radiotri_id_dep_clicked()
 {
-  ui->table_depart->setModel(tmpdep.tri_idchef());
+  ui->table_depart->setModel(tmpdep.tri_matricule());
 }
 
 void MainWindow::on_radiotri_id_emp_clicked()
@@ -327,34 +327,34 @@ void MainWindow::on_recherche_departement_textChanged(const QString &arg1)
     const QString rech=ui->recherche_departement->text();
 
     if((nom && id && date_c) || (!nom && !id && !date_c)){
-        ui->table_depart->setModel(tmpdep.recherche_dep(rech));
+        ui->table_depart->setModel(tmpdep.recherche_poste(rech));
         qDebug() <<"3!!";
     }
     else{
         if(nom){
             if(id){
-                ui->table_depart->setModel(tmpdep.recherche_nom_id(rech));
+                ui->table_depart->setModel(tmpdep.recherche_type_matricule(rech));
                 qDebug()<<"nom w id";
             }
             else if(date_c){
-                ui->table_depart->setModel(tmpdep.recherche_nom_date(rech));
+                ui->table_depart->setModel(tmpdep.recherche_type_salaire(rech));
                 qDebug()<<"nom w date";
             }
             else{
-                ui->table_depart->setModel(tmpdep.recherche_nom(rech));
+                ui->table_depart->setModel(tmpdep.recherche_type(rech));
             }
         }
         else if(id){
             if(date_c){
-                ui->table_depart->setModel(tmpdep.recherche_id_date(rech));
+                ui->table_depart->setModel(tmpdep.recherche_matricule_salaire(rech));
                 qDebug()<<"id w date";
             }
             else{
-                ui->table_depart->setModel(tmpdep.recherche_id(rech));
+                ui->table_depart->setModel(tmpdep.recherche_matricule(rech));
             }
         }
         else{
-            ui->table_depart->setModel(tmpdep.recherche_date(rech));
+            ui->table_depart->setModel(tmpdep.recherche_salaire(rech));
         }
     }
 
@@ -362,23 +362,23 @@ void MainWindow::on_recherche_departement_textChanged(const QString &arg1)
 
 void MainWindow::on_checkBox_rech_nom_dep_clicked()
 {
-ui->table_depart->setModel(tmpdep.recherche_nom(ui->recherche_departement->text()));
+ui->table_depart->setModel(tmpdep.recherche_type(ui->recherche_departement->text()));
 }
 
 void MainWindow::on_checkBox_rech_id_chef_clicked()
 {
- ui->table_depart->setModel(tmpdep.recherche_id(ui->recherche_departement->text()));
+ ui->table_depart->setModel(tmpdep.recherche_matricule(ui->recherche_departement->text()));
 }
 
 void MainWindow::on_checkBox_rech_date_c_clicked()
 {
-ui->table_depart->setModel(tmpdep.recherche_date(ui->recherche_departement->text()));
+ui->table_depart->setModel(tmpdep.recherche_salaire(ui->recherche_departement->text()));
 }
 
 
 void MainWindow::sendMail()
 {
-    Smtp* smtp = new Smtp("fahmimankous@gmail.com","Azertyuiop","smtp.gmail.com");
+    Smtp* smtp = new Smtp("nour.sbaoulji@esprit.tn","Azertyuiop","smtp.gmail.com");
     connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
 
 

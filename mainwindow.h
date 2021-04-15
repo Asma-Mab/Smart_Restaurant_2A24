@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 #include<QMessageBox>
 #include <QMainWindow>
-#include"employe.h"
 #include "poste.h"
+#include "employe.h"
 #include<QDebug>
 #include<QValidator>
 #include"smtp.h"
