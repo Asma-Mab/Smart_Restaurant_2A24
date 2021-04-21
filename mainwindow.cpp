@@ -57,35 +57,8 @@ void MainWindow::on_pushButton_2_clicked()
     msgBox.exec();
 }
 
- void MainWindow::on_pushButton_3_clicked()
- {
-     if((ui->nommodif->text() != "") &&(ui->prenommodif->text() != "") &&(ui->adressemodif->text() != "") &&(ui->emailmodif->text() != "") &&(ui->nummodif->text() != ""))
-     {
-         if(C.modifier(ui->comboBox->currentText().toInt(),ui->nummodif->text().toInt(),ui->nommodif->text(),ui->prenommodif->text(),ui->adressemodif->text(),ui->emailmodif->text()))
-         {
-             //refresh tableau
-             ui->table_clients->setModel(C.afficher());}
 
-             //message
-             QMessageBox::information(this, QObject::tr("Modifier un client"),
-                         QObject::tr("client Modifier.\n"
-                                     "Click Cancel to exit."), QMessageBox::Cancel);
-         }
-         else
-         {
-             QMessageBox::critical(this, QObject::tr("client une reservation"),
-                         QObject::tr("Erreur !.\n"
-                                     "Click Cancel to exit."), QMessageBox::Cancel);
-         }
-
-
-     }
-
-
-
-
-
-void MainWindow::on_pushButton_4_clicked()
+/*void MainWindow::on_pushButton_4_clicked()
 {
     clients C; C.setCIN(ui->cinsupp->text().toInt());
     bool test=C.supprimer(C.getCIN());
@@ -96,7 +69,7 @@ void MainWindow::on_pushButton_4_clicked()
     else
         msgBox.setText("Echec de suppression");
     msgBox.exec();
-}
+}*/
 
 void MainWindow::on_pushButton_clicked()
 {
@@ -135,76 +108,62 @@ void MainWindow::on_pushButton_5_clicked()
     msgBox.exec();
 }
 
-void MainWindow::on_comboBox_activated(const QString &arg1)
+void MainWindow::on_pushButton_4_clicked()
 {
-    {
-        QSqlQuery query;
-
-        QString CIN = ui->comboBox->currentText();
-
-        query =C.request(CIN);
-        if(query.exec())
-        {
-            while(query.next())
-            {
-                ui->nommodif->setText(query.value(2).toString());
-                ui->prenommodif->setText(query.value(3).toString());
-                ui->adressemodif->setText(query.value(4).toString());
-                ui->emailmodif->setText(query.value(5).toString());
-                ui->nummodif->setText(query.value(6).toString());
-
-
-            }
-        }
-
-    }
+    clients C; C.setCIN(ui->cinsupp->text().toInt());
+    bool test=C.supprimer(C.getCIN());
+    QMessageBox msgBox;
+    if(test)
+    {msgBox.setText("suppression avec succée");
+    ui->table_clients->setModel(C.afficher());}
+    else
+        msgBox.setText("Echec de suppression");
+    msgBox.exec();
 }
 
-void MainWindow::on_comboBox_2_activated(const QString &arg1)
-    {
-        {
-            QSqlQuery query;
 
-            QString ref = ui->comboBox_2->currentText();
-
-            query =C1.request(ref);
-            if(query.exec())
-            {
-                while(query.next())
-                {
-                    ui->designationmodif->setText(query.value(1).toString());
-                    ui->PrixUnitmodif->setText(query.value(4).toString());
-                    ui->montantmodif->setText(query.value(5).toString());
-
-
-                }
-            }
-
-        }
-    }
-
-
-void MainWindow::on_pushButton_6_clicked()
+void MainWindow::on_pushButton_11_clicked()
 {
-    if((ui->designationmodif->text() != "") &&(ui->PrixUnitmodif->text() != "") &&(ui->montantmodif->text() != ""))
+    clients C;
+    QSqlQuery query;
+    int cin=ui->cinmodif->text().toInt();
+    QString cin_string=QString::number(cin);
+   if(C.recherche_cin(cin))
+   {
+       query.prepare("SELECT * FROM CLIENTS WHERE cin like :cin");
+       query.bindValue(0,cin_string);
+       query.exec();
+       while(query.next())
     {
-        if(C1.modifier(ui->PrixUnitmodif->text().toInt(),ui->montantmodif->text().toInt(),ui->quantitemodif->text().toInt(),ui->comboBox_2->currentText().toInt(),ui->designationmodif->text()))
-        {
-            //refresh tableau
-            ui->table_commande->setModel(C1.afficher());}
-
-            //message
-            QMessageBox::information(this, QObject::tr("Modifier une commande"),
-                        QObject::tr("commande Modifier.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-        }
-        else
-        {
-            QMessageBox::critical(this, QObject::tr("Modifier une commande"),
-                        QObject::tr("Erreur !.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-        }
-
+       ui->nommodif->setText(query.value(1).toString());
+       ui->prenommodif->setText(query.value(2).toString());
+       ui->adressemodif->setText(query.value(3).toString());
+       ui->emailmodif->setText(query.value(4).toString());
+       ui->nummodif->setText(query.value(5).toString());
 
     }
+   }
+}
 
+void MainWindow::on_pushButton_3_clicked()
+{
+    clients C;
+    QMessageBox msg;
+    C.setCIN(ui->cinmodif->text().toInt());
+    C.setNom(ui->nommodif->text());
+    C.setPrenom(ui->prenommodif->text());
+    C.setAdresse(ui->adressemodif->text());
+    C.setEmail(ui->emailmodif->text());
+    C.setNum(ui->nummodif->text().toInt());
+
+    bool test=C.modifier(C.getCIN());
+    if(test)
+    {
+        msg.setText("modification avec succès");
+        ui->table_clients->setModel(C.afficher());
+    }
+    else
+        msg.setText("echec de modification");
+
+    msg.exec();
+}

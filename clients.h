@@ -29,15 +29,16 @@ public:
 
     bool ajouter();
     QSqlQueryModel * afficher();
-    bool modifier(int,int,QString,QString,QString,QString);
+    bool modifier(int/*,int,QString,QString,QString,QString*/);
     bool supprimer(int);
 
-    QSqlQueryModel * rechercher(QString);
+    bool recherche_nom(QString);
+    bool recherche_num(int);
+    bool recherche_cin(int);
+
     QSqlQueryModel * trie_az();
     QSqlQueryModel * trie_CIN();
     QSqlQueryModel * trie_num();
-    int calcul_client(int,int);
-    QSqlQueryModel * remplircomboreser();
     QSqlQuery request(QString);
 
 };

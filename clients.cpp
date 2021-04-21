@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "clients.h"
 
 clients::clients(int CIN, QString adresse, QString nom, QString prenom, QString email, int num)
@@ -44,7 +45,7 @@ QSqlQueryModel * clients::afficher()
      return  model;
 }
 
-bool clients::modifier (int CIN, int num, QString nom, QString prenom , QString adresse, QString email)
+bool clients::modifier (int CIN/*, int num, QString nom, QString prenom , QString adresse, QString email*/)
 {
 
     QSqlQuery query;
@@ -122,46 +123,73 @@ model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
 model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
 return model;
 }
-QSqlQueryModel * clients::rechercher(QString res)
-{
 
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from clients where ref ='"+res+"'");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
-return model;
-}
-
-int clients::calcul_client(int min, int max)
+bool clients::recherche_nom(QString nom)
 {
+    QMessageBox msgBox;
     QSqlQuery query;
-    query.prepare("select *from CLIENTS where CIN between :min and :max");
-    query.bindValue(":min",min);
-    query.bindValue(":max",max);
-    query.exec();
 
-    int total=0;
-    while(query.next()){
-        total++;
+    query.prepare("SELECT * FROM CLIENTS WHERE NOM= :nom");
+    query.bindValue(":nom", nom);
+    if (query.exec() && query.next())
+    {
+            return true;
     }
-    return total;
+    else
+    {
+
+        msgBox.setText("clients n existe pas");
+        msgBox.exec();
+        return false;
+    }
 }
 
-//******REMPLIR COMBO BOX
 
-QSqlQueryModel * clients::remplircomboreser()
+
+bool clients::recherche_num(int num)
 {
-    QSqlQueryModel * mod= new QSqlQueryModel();
+    QMessageBox msgBox;
     QSqlQuery query;
-    query.prepare("SELECT CIN from CLIENTS");
-    query.exec();
-    mod->setQuery(query);
-    return mod;
+
+    query.prepare("SELECT * FROM CLIENTS WHERE SALAIRE= :salaire");
+    query.bindValue(":num", num);
+    if (query.exec() && query.next())
+    {
+            return true;
+    }
+    else
+    {
+        msgBox.setText("client n existe pas");
+        msgBox.exec();
+        return false;
+    }
 }
+
+
+
+bool clients::recherche_cin(int cin)
+{
+
+    QMessageBox msgBox;
+    QSqlQuery query;
+     QString cin_string=QString::number(cin);
+    query.prepare("SELECT * FROM CLIENTS WHERE CIN= :cin");
+    query.bindValue(":cin", cin_string);
+    if (query.exec() && query.next())
+    {
+            return true;
+    }
+    else
+    {
+        msgBox.setText("client n existe pas");
+        msgBox.exec();
+        return false;
+    }
+}
+
+
+
+
 QSqlQuery clients::request(QString CIN)
 {
     QSqlQuery query;
