@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
+    <width>789</width>
     <height>455</height>
    </rect>
   </property>
@@ -479,7 +479,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -491,11 +491,11 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <x>0</x>
           <y>0</y>
           <width>771</width>
-          <height>311</height>
+          <height>321</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -506,7 +506,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>611</width>
+            <width>751</width>
             <height>271</height>
            </rect>
           </property>
@@ -656,7 +656,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             <rect>
              <x>430</x>
              <y>220</y>
-             <width>101</width>
+             <width>151</width>
              <height>23</height>
             </rect>
            </property>
@@ -675,8 +675,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>0</x>
             <y>71</y>
-            <width>601</width>
-            <height>191</height>
+            <width>651</width>
+            <height>211</height>
            </rect>
           </property>
          </widget>
@@ -685,8 +685,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>0</x>
             <y>-1</y>
-            <width>611</width>
-            <height>271</height>
+            <width>761</width>
+            <height>291</height>
            </rect>
           </property>
           <property name="title">
@@ -695,18 +695,33 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <widget class="QComboBox" name="comboBox_3">
            <property name="geometry">
             <rect>
-             <x>20</x>
-             <y>30</y>
+             <x>60</x>
+             <y>10</y>
              <width>151</width>
              <height>22</height>
             </rect>
            </property>
+           <item>
+            <property name="text">
+             <string>Rechercher par CIN</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Rechercher par nom</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Rechercher par numero</string>
+            </property>
+           </item>
           </widget>
           <widget class="QPushButton" name="pushButton_7">
            <property name="geometry">
             <rect>
-             <x>200</x>
-             <y>30</y>
+             <x>160</x>
+             <y>40</y>
              <width>75</width>
              <height>23</height>
             </rect>
@@ -725,7 +740,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </rect>
            </property>
            <property name="text">
-            <string>trie par nom</string>
+            <string>trie par CIN</string>
            </property>
           </widget>
           <widget class="QPushButton" name="pushButton_9">
@@ -738,7 +753,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </rect>
            </property>
            <property name="text">
-            <string>trie par CIN</string>
+            <string>trie par nom</string>
            </property>
           </widget>
           <widget class="QPushButton" name="pushButton_10">
@@ -752,6 +767,42 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            </property>
            <property name="text">
             <string>trie par numero</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>113</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_13">
+           <property name="geometry">
+            <rect>
+             <x>670</x>
+             <y>100</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>PDF</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_18">
+           <property name="geometry">
+            <rect>
+             <x>670</x>
+             <y>150</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>IMPRIMER</string>
            </property>
           </widget>
          </widget>
@@ -856,8 +907,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>0</x>
             <y>-1</y>
-            <width>611</width>
-            <height>281</height>
+            <width>751</width>
+            <height>291</height>
            </rect>
           </property>
           <property name="title">
@@ -928,9 +979,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <widget class="QPushButton" name="pushButton_3">
            <property name="geometry">
             <rect>
-             <x>350</x>
+             <x>520</x>
              <y>240</y>
-             <width>101</width>
+             <width>151</width>
              <height>23</height>
             </rect>
            </property>
@@ -953,59 +1004,55 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          <attribute name="title">
           <string>Supprimer</string>
          </attribute>
-         <widget class="QLabel" name="label_17">
-          <property name="geometry">
-           <rect>
-            <x>110</x>
-            <y>30</y>
-            <width>101</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>CIN</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="cinsupp">
-          <property name="geometry">
-           <rect>
-            <x>260</x>
-            <y>50</y>
-            <width>141</width>
-            <height>20</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="pushButton_4">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>140</y>
-            <width>141</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>supprimer</string>
-          </property>
-         </widget>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>-1</y>
-            <width>611</width>
-            <height>271</height>
+            <width>751</width>
+            <height>291</height>
            </rect>
           </property>
           <property name="title">
            <string>supprimer</string>
           </property>
+          <widget class="QLineEdit" name="cinsupp">
+           <property name="geometry">
+            <rect>
+             <x>400</x>
+             <y>60</y>
+             <width>141</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_17">
+           <property name="geometry">
+            <rect>
+             <x>250</x>
+             <y>50</y>
+             <width>101</width>
+             <height>51</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>CIN</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_4">
+           <property name="geometry">
+            <rect>
+             <x>290</x>
+             <y>160</y>
+             <width>141</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>supprimer</string>
+           </property>
+          </widget>
          </widget>
-         <zorder>groupBox_3</zorder>
-         <zorder>label_17</zorder>
-         <zorder>cinsupp</zorder>
-         <zorder>pushButton_4</zorder>
         </widget>
        </widget>
       </widget>
@@ -1018,18 +1065,18 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          <rect>
           <x>-4</x>
           <y>-1</y>
-          <width>751</width>
-          <height>311</height>
+          <width>761</width>
+          <height>321</height>
          </rect>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_7">
          <attribute name="title">
           <string>Ajouter</string>
          </attribute>
-         <widget class="QLineEdit" name="designation">
+         <widget class="QLineEdit" name="numero">
           <property name="geometry">
            <rect>
             <x>200</x>
@@ -1081,19 +1128,6 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <string/>
           </property>
          </widget>
-         <widget class="QPushButton" name="pushButton">
-          <property name="geometry">
-           <rect>
-            <x>430</x>
-            <y>240</y>
-            <width>141</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Ajouter</string>
-          </property>
-         </widget>
          <widget class="QLabel" name="label">
           <property name="geometry">
            <rect>
@@ -1104,7 +1138,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            </rect>
           </property>
           <property name="text">
-           <string>Désignation</string>
+           <string>numero</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_2">
@@ -1164,8 +1198,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>10</x>
             <y>-1</y>
-            <width>611</width>
-            <height>281</height>
+            <width>741</width>
+            <height>291</height>
            </rect>
           </property>
           <property name="title">
@@ -1181,13 +1215,25 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </rect>
            </property>
           </widget>
+          <widget class="QPushButton" name="pushButton">
+           <property name="geometry">
+            <rect>
+             <x>480</x>
+             <y>240</y>
+             <width>161</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Ajouter</string>
+           </property>
+          </widget>
          </widget>
          <zorder>groupBox_4</zorder>
-         <zorder>designation</zorder>
+         <zorder>numero</zorder>
          <zorder>ref</zorder>
          <zorder>prixUnitaire</zorder>
          <zorder>montant</zorder>
-         <zorder>pushButton</zorder>
          <zorder>label</zorder>
          <zorder>label_2</zorder>
          <zorder>label_3</zorder>
@@ -1202,9 +1248,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>10</y>
-            <width>591</width>
-            <height>261</height>
+            <y>70</y>
+            <width>641</width>
+            <height>211</height>
            </rect>
           </property>
          </widget>
@@ -1213,13 +1259,100 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>10</x>
             <y>-1</y>
-            <width>601</width>
-            <height>281</height>
+            <width>741</width>
+            <height>291</height>
            </rect>
           </property>
           <property name="title">
            <string>Afficher</string>
           </property>
+          <widget class="QComboBox" name="comboBox">
+           <property name="geometry">
+            <rect>
+             <x>50</x>
+             <y>10</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>Recherche par numero</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Recherche par reference </string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Recherche par montant</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QPushButton" name="pushButton_14">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>40</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>rechercher</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_15">
+           <property name="geometry">
+            <rect>
+             <x>330</x>
+             <y>40</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>reference</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_16">
+           <property name="geometry">
+            <rect>
+             <x>410</x>
+             <y>40</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>numero</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pushButton_17">
+           <property name="geometry">
+            <rect>
+             <x>490</x>
+             <y>40</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>montant</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="lineEdit_2">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>40</y>
+             <width>91</width>
+             <height>20</height>
+            </rect>
+           </property>
+          </widget>
          </widget>
          <zorder>groupBox_8</zorder>
          <zorder>table_commande</zorder>
@@ -1233,14 +1366,14 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>10</x>
             <y>-1</y>
-            <width>611</width>
+            <width>741</width>
             <height>291</height>
            </rect>
           </property>
           <property name="title">
            <string>modifier</string>
           </property>
-          <widget class="QLineEdit" name="designationmodif">
+          <widget class="QLineEdit" name="numeromodif">
            <property name="geometry">
             <rect>
              <x>230</x>
@@ -1290,7 +1423,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
             </rect>
            </property>
            <property name="text">
-            <string>Désignation</string>
+            <string>numero</string>
            </property>
           </widget>
           <widget class="QLabel" name="label_21">
@@ -1348,9 +1481,9 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <widget class="QPushButton" name="pushButton_6">
            <property name="geometry">
             <rect>
-             <x>390</x>
-             <y>230</y>
-             <width>121</width>
+             <x>530</x>
+             <y>240</y>
+             <width>151</width>
              <height>23</height>
             </rect>
            </property>
@@ -1371,8 +1504,8 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <widget class="QPushButton" name="pushButton_12">
            <property name="geometry">
             <rect>
-             <x>400</x>
-             <y>80</y>
+             <x>390</x>
+             <y>40</y>
              <width>101</width>
              <height>23</height>
             </rect>
@@ -1415,7 +1548,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
            <rect>
             <x>10</x>
             <y>-1</y>
-            <width>611</width>
+            <width>741</width>
             <height>291</height>
            </rect>
           </property>
@@ -1425,7 +1558,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
           <widget class="QLabel" name="label_19">
            <property name="geometry">
             <rect>
-             <x>30</x>
+             <x>50</x>
              <y>60</y>
              <width>71</width>
              <height>31</height>
@@ -1451,7 +1584,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>638</width>
+     <width>789</width>
      <height>21</height>
     </rect>
    </property>

@@ -1,127 +1,83 @@
 #include <QMessageBox>
 #include "clients.h"
+clients::clients()
 
-clients::clients(int CIN, QString adresse, QString nom, QString prenom, QString email, int num)
+{cin=0;nom=" ";prenom=" ";adresse=" ";email=" ";num=0;}
+
+clients::clients(int cin,int num, QString nom, QString prenom, QString adresse, QString email)
+
 {
-     this->CIN=CIN;
-     this->num=num;
-     this->adresse=adresse;
-     this->nom=nom;
-     this->prenom=prenom;
-     this->email;
+ this->cin=cin;
+ this->num=num;
+ this->nom=nom;
+ this->prenom=prenom;
+ this->adresse=adresse;
+ this->email=email;
 }
 
-bool clients::ajouter()
-{
+int clients::getcin(){return cin;}
+int clients::getnum(){return num;}
+QString clients::getnom(){return nom;}
+QString clients::getprenom(){return prenom;}
+QString clients::getadresse(){return adresse;}
+QString clients::getemail(){return email;}
+
+void clients::setcin(int cin){this->cin=cin;}
+void clients::setnum(int num){this->num=num;}
+void clients::setnom(QString nom){this->nom=nom;}
+void clients::setprenom(QString prenom){this->prenom=prenom;}
+void clients::setadresse(QString adresse){this->adresse=adresse;}
+void clients::setemail(QString email){this->email=email;}
+
+    bool clients::ajouter()
+    {
+        bool test=false;
+        QSqlQuery query;
+        QString cin_string=QString::number(cin);
+         QString r=QString::number(num);
+        query.prepare("INSERT INTO clients (cin,numero,nom,prenom,adresse,email) "
+                      "VALUES (:cin,:numero,:nom,:prenom,:adresse,:email)");
+        query.bindValue(":cin", cin_string);
+        query.bindValue(":numero", r);
+        query.bindValue(":nom",nom);
+        query.bindValue(":prenom", prenom);
+        query.bindValue(":adresse", adresse);
+        query.bindValue(":email",email);
+        return query.exec();
+
+        return test;
+
+
+}
+
+
+
+
+bool clients::supprimer(int cin){
     QSqlQuery query;
-       QString res=QString::number(CIN);
-
-       query.prepare("INSERT INTO CLIENTS (CIN,nom,prenom,adresse,email,num) VALUES (:CIN,:nom,:prenom,:adresse,:email,:num)");
-              query.bindValue(":CIN",res);
-              query.bindValue(":nom",nom);
-              query.bindValue(":prenom",prenom);
-              query.bindValue(":adresse", adresse);
-              query.bindValue(":email", email);
-              query.bindValue(":num", num);
-
-             return query.exec();
-
+    clients C;
+    bool test=C.recherche_cin(cin);
+    if(test){
+    query.prepare(" Delete from CLIENTS where cin=:cin");
+    query.bindValue(":cin", cin);
+    }
+    return query.exec();
 }
 
 
-QSqlQueryModel * clients::afficher()
+
+QSqlQueryModel* clients::afficher()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
+    model->setQuery("SELECT* FROM  CLIENTS");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("cin"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("numero"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("nom"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("prenom"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("adresse"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("email"));
 
-
-      model->setQuery("SELECT * FROM CLIENTS");
-      model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
-      model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom"));
-      model->setHeaderData(2, Qt::Horizontal, QObject::tr("prenom"));
-      model->setHeaderData(3, Qt::Horizontal, QObject::tr("adresse"));
-      model->setHeaderData(4, Qt::Horizontal, QObject::tr("email"));
-      model->setHeaderData(5, Qt::Horizontal, QObject::tr("numero"));
-
-     return  model;
-}
-
-bool clients::modifier (int CIN/*, int num, QString nom, QString prenom , QString adresse, QString email*/)
-{
-
-    QSqlQuery query;
-    QString res= QString::number(CIN);
-    QString res5= QString::number(num);
-
-    query.prepare("UPDATE clients SET nom=:nom,prenom=:prenom,adresse=:adresse,num=:num WHERE CIN =:res");
-    query.bindValue(":res",res);
-    query.bindValue(":nom",nom);
-    query.bindValue(":prenom",prenom);
-    query.bindValue(":adresse",adresse);
-    query.bindValue(":email",email);
-    query.bindValue(":num",res5);
-
-    return query.exec();
-
-
-
-}
-
-
-
-bool clients::supprimer(int CIN)
-
-    {
-    QSqlQuery query;
-   /* QString res = QString::number(CIN);*/
-    query.prepare("Delete from CLIENTS where CIN= :CIN");
-    query.bindValue(":CIN",CIN);
-    return query.exec();
-    }
-
-
-
-
-QSqlQueryModel * clients::trie_az()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from clients order by nom asc");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
-return model;
-}
-
-
-
-QSqlQueryModel * clients::trie_CIN()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from clients order by CIN desc");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
-return model;
-}
-
-
-
-QSqlQueryModel * clients::trie_num()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from clients order by num desc");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("nom"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("prenom"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("CIN"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("adresse"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("email"));
-model->setHeaderData(6,Qt::Horizontal,QObject::tr("num"));
-return model;
+    return model;
 }
 
 bool clients::recherche_nom(QString nom)
@@ -138,7 +94,7 @@ bool clients::recherche_nom(QString nom)
     else
     {
 
-        msgBox.setText("clients n existe pas");
+        msgBox.setText("client n existe pas");
         msgBox.exec();
         return false;
     }
@@ -146,13 +102,13 @@ bool clients::recherche_nom(QString nom)
 
 
 
-bool clients::recherche_num(int num)
+bool clients::recherche_num(int)
 {
     QMessageBox msgBox;
     QSqlQuery query;
 
-    query.prepare("SELECT * FROM CLIENTS WHERE SALAIRE= :salaire");
-    query.bindValue(":num", num);
+    query.prepare("SELECT * FROM CLIENTS WHERE NUMERO= :num");
+    query.bindValue(":numero", num);
     if (query.exec() && query.next())
     {
             return true;
@@ -181,7 +137,7 @@ bool clients::recherche_cin(int cin)
     }
     else
     {
-        msgBox.setText("client n existe pas");
+        msgBox.setText("CLIENTS n existe pas");
         msgBox.exec();
         return false;
     }
@@ -189,14 +145,63 @@ bool clients::recherche_cin(int cin)
 
 
 
-
-QSqlQuery clients::request(QString CIN)
+QSqlQueryModel* clients::afficher_cin(int cin)
 {
-    QSqlQuery query;
+    QSqlQueryModel* model= new QSqlQueryModel();
+    QString CIN_string=QString::number(cin);
 
-    query.prepare("select * from CLIENTS where CIN= '"+CIN+"'");
-    query.addBindValue(CIN);
-    query.exec();
-    return query;
+          model->setQuery("SELECT * FROM CLIENTS WHERE CIN='"+CIN_string+"'");
+
+    return model;
 }
 
+
+
+
+QSqlQueryModel* clients::afficher_nom(QString nom)
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+
+          model->setQuery("SELECT * FROM CLIENTS WHERE NOM='"+nom+"'");
+
+    return model;
+}
+
+
+
+
+QSqlQueryModel* clients::afficher_num(int)
+{
+    QSqlQueryModel* model= new QSqlQueryModel();
+    QString num_string=QString::number(num);
+
+
+          model->setQuery("SELECT * FROM CLIENTS WHERE NUMERO='"+num_string+"'");
+
+    return model;
+}
+
+
+
+
+
+bool clients::modifier(int cin)
+{
+    QSqlQuery query;
+    QString cin_string=QString::number(cin);
+    QString num_string=QString::number(num);
+
+    if (recherche_cin(cin))
+    {
+
+          query.prepare("UPDATE CLIENTS SET nom=:nom, prenom=:prenom, adresse=:adresse, numero=:numero, email=:email WHERE CIN=:cin");
+          query.bindValue(":cin", cin_string);
+          query.bindValue(":numero", num_string);
+          query.bindValue(":nom",nom);
+          query.bindValue(":prenom", prenom);
+          query.bindValue(":adresse", adresse);
+          query.bindValue(":email", email);
+
+    }
+          return query.exec();
+}

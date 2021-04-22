@@ -9,35 +9,34 @@
         }
         class commande
         {
-            QString designation;
-            int ref,qte,PrixUnit,montant;
+            int numero,ref,qte,PrixUnit,montant;
 
         public:
             commande(){}
-            commande(QString,int,int,int,int);
+            commande(int,int,int,int,int);
 
-            QString get_designation(){return designation;}
+            int get_numero(){return numero;}
             int get_ref(){return ref;}
             int get_qte(){return qte;}
             int get_prix_unit(){return PrixUnit;}
             int get_montant(){return montant;}
 
-            void set_designation(QString designation){this->designation=designation;}
+            void set_numero(int numero){this->numero=numero;}
             void set_ref(int ref){this->ref=ref;}
             void set_qte(int qte){this->qte=qte;}
             void set_prix_unit(int PrixUnit){this->PrixUnit=PrixUnit;}
             void set_montant(int montant){this->montant=montant;}
 
-            bool ajouter_commande();
-            QSqlQueryModel * afficher();
+            bool ajouter_commande();                       
+            QSqlQueryModel* afficher();
+            QSqlQueryModel* afficher_numero(int);
+            QSqlQueryModel* afficher_ref(int);
+            QSqlQueryModel* afficher_montant(int);
+            bool modifier_commande(int);
+            bool recherche_ref(int);
+            bool recherche_numc(int);
+            bool recherche_montant(int);
             bool supprimer_commande(int);
-            bool modifier(int,int,int,int,QString);
-            QSqlQueryModel * rechercher(QString);
-            QSqlQueryModel * trie_az();
-            QSqlQueryModel * trie_qte();
-            QSqlQueryModel * trie_mont();
-            QSqlQueryModel * remplircomboreser();
-            QSqlQuery request(QString);
 
 
 };
