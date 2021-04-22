@@ -57,7 +57,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     clients C;
-    commande C1;
+    commande Co;
 };
 
 #endif // MAINWINDOW_H

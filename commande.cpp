@@ -11,31 +11,40 @@ commande::commande(int numero,int ref,int qte,int PrixUnit,int montant)
     this->PrixUnit=PrixUnit;
     this->montant=montant;
 }
+
+
 bool commande::ajouter_commande()
 {
-  QSqlQuery query;
-  QString res = QString::number(ref);
-  QString res1 = QString::number(qte);
-  QString res2 = QString::number(PrixUnit);
-  QString res3 = QString::number(montant);
-  QString res4 = QString::number(numero);
 
-  query.prepare("INSERT INTO COMMANDE (numero,ref,qte,PrixUnitaire,montant) VALUES (:numero,:ref,:qte,:PrixUnit,:montant)");
-  query.bindValue(":numero",res4);
-  query.bindValue(":ref",res);
-  query.bindValue(":qte",res1);
-  query.bindValue(":PrixUnit",res2);
-  query.bindValue(":montant",res3);
+ // bool test=false;
+  QSqlQuery query;
+  QString res = QString::number(numero);
+  QString res1 = QString::number(ref);
+  QString res2 = QString::number(qte);
+  QString res3 = QString::number(PrixUnit);
+  QString res4 = QString::number(montant);
+
+  query.prepare("INSERT INTO COMMANDE (numero, ref, qte, PrixUnit, montant) "
+                 " VALUES (:numero, :ref, :qte, :PrixUnit, :montant)");
+
+  query.bindValue(":numero",res);
+  query.bindValue(":ref",res1);
+  query.bindValue(":qte",res2);
+  query.bindValue(":PrixUnit",res3);
+  query.bindValue(":montant",res4);
 
   return query.exec();
+  //return test;
+
 }
+
 
 bool commande::supprimer_commande(int)
 {
 QSqlQuery query;
-QString res = QString::number(numero);
-query.prepare("Delete from commande where NUMERO= :numero");
-query.bindValue(":numero",res);
+QString res = QString::number(ref);
+query.prepare("Delete from commande where REF= :ref");
+query.bindValue(":ref",res);
 return query.exec();
 }
 
@@ -267,24 +276,5 @@ model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
 return model;
 }
 
-//******REMPLIR COMBO BOX
-
-QSqlQueryModel * commande::remplircomboreser()
-{
-    QSqlQueryModel * mod= new QSqlQueryModel();
-    QSqlQuery query;
-    query.prepare("select REF from COMMANDE");
-    query.exec();
-    mod->setQuery(query);
-    return mod;
-}
-QSqlQuery commande::request(QString ref)
-{
-    QSqlQuery query;
-    query.prepare("select * from COMMANDE where REF= '"+ref+"'");
-    query.addBindValue(ref);
-    query.exec();
-    return query;
-}
 
 */

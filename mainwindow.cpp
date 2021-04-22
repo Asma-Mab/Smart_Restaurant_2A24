@@ -23,7 +23,7 @@
 #include <QPixmap>
 #include <QTabWidget>
 #include <QValidator>
-//#include <QPrintDialog>
+#include <QPrintDialog>
 #include<QtSql/QSqlQuery>
 #include<QVariant>
 #include <QValidator>
@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->refsupp->setValidator (new QIntValidator(0,99999999, this));
 
     ui->table_clients->setModel(C.afficher());
-    ui->table_commande->setModel(C1.afficher());
+    ui->table_commande->setModel(Co.afficher());
     }
 
 
@@ -88,19 +88,19 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     int numero=ui->numero->text().toInt();
-    int qte=ui->qte->text().toInt();
     int ref=ui->ref->text().toInt();
-    int montant=ui->montant->text().toInt();
+    int qte=ui->qte->text().toInt();
     int PrixUnit =ui->prixUnitaire->text().toInt();
+    int montant=ui->montant->text().toInt();
 
 
-    commande C1(numero, ref, qte, montant, PrixUnit);
-    bool test=C1.ajouter_commande();
+    commande Co (numero, ref, qte, PrixUnit, montant);
+    bool test1=Co.ajouter_commande();
     QMessageBox msgBox;
-    if(test)
+    if(test1)
       {
       msgBox.setText("ajout avec succée");
-      ui->table_commande->setModel(C1.afficher());
+      ui->table_commande->setModel(Co.afficher());
     }
 
     else
@@ -111,12 +111,13 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    commande C1; C1.set_ref(ui->refsupp->text().toInt());
-    bool test=C1.supprimer_commande(C1.get_ref());
+    commande Co;
+    Co.set_ref(ui->refsupp->text().toInt());
+    bool test=Co.supprimer_commande(Co.get_ref());
     QMessageBox msgBox;
     if(test)
     {msgBox.setText("suppression avec succée");
-    ui->table_commande->setModel(C1.afficher());}
+    ui->table_commande->setModel(Co.afficher());}
     else
         msgBox.setText("Echec de suppression");
     msgBox.exec();
@@ -152,11 +153,11 @@ void MainWindow::on_pushButton_11_clicked()
        query.exec();
        while(query.next())
    {
-       ui->nummodif->setText(query.value(1).toString());
+       ui->nummodif->setText(query.value(5).toString());
        ui->nommodif->setText(query.value(2).toString());
        ui->prenommodif->setText(query.value(3).toString());
        ui->adressemodif->setText(query.value(4).toString());
-       ui->emailmodif->setText(query.value(5).toString());
+       ui->emailmodif->setText(query.value(1).toString());
 
     }
    }
@@ -272,7 +273,7 @@ void MainWindow::on_pushButton_7_clicked()
         }
 }
 
-/*void MainWindow::on_pushButton_13_clicked()
+void MainWindow::on_pushButton_13_clicked()
 {
     QString strStream;
                   QTextStream out(&strStream);
@@ -325,7 +326,7 @@ void MainWindow::on_pushButton_7_clicked()
               doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
               doc.print(&printer);
 }
-*/
+
 
 
 void MainWindow::on_pushButton_12_clicked()
@@ -367,7 +368,7 @@ void MainWindow::on_pushButton_6_clicked()
     if(test)
     {
         msg.setText("modification avec succès");
-        ui->table_commande->setModel(C.afficher());
+        ui->table_commande->setModel(Co.afficher());
     }
     else
         msg.setText("echec de modification");
@@ -383,7 +384,7 @@ void MainWindow::on_pushButton_14_clicked()
             int numero=ui->lineEdit_2->text().toInt();
             if (C.recherche_numc(numero))
             {
-                ui->table_commande->setModel(C.afficher_numero(numero));
+                ui->table_commande->setModel(Co.afficher_numero(numero));
             }
         }
         else if(ui->comboBox->currentText()=="Recherche par reference")
@@ -391,7 +392,7 @@ void MainWindow::on_pushButton_14_clicked()
             int ref=ui->lineEdit_2->text().toInt();
             if (C.recherche_ref(ref))
             {
-                ui->table_commande->setModel(C.afficher_ref(ref));
+                ui->table_commande->setModel(Co.afficher_ref(ref));
             }
 
         }
@@ -400,7 +401,7 @@ void MainWindow::on_pushButton_14_clicked()
             int montant=ui->lineEdit_2->text().toInt();
             if(C.recherche_montant(montant))
             {
-                ui->table_commande->setModel(C.afficher_montant(montant));
+                ui->table_commande->setModel(Co.afficher_montant(montant));
             }
         }
 }
@@ -462,15 +463,7 @@ void MainWindow::on_pushButton_17_clicked()
 
 
 
-
-
-
-
-
-
-
-
-/*void MainWindow::on_pushButton_18_clicked()
+void MainWindow::on_pushButton_18_clicked()
 {
     QPrinter printer;
 
@@ -482,4 +475,4 @@ void MainWindow::on_pushButton_17_clicked()
 
         return;
 
-}*/
+}

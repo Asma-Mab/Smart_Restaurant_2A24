@@ -31,7 +31,7 @@ void clients::setemail(QString email){this->email=email;}
 
     bool clients::ajouter()
     {
-        bool test=false;
+       // bool test=false;
         QSqlQuery query;
         QString cin_string=QString::number(cin);
          QString r=QString::number(num);
@@ -45,7 +45,7 @@ void clients::setemail(QString email){this->email=email;}
         query.bindValue(":email",email);
         return query.exec();
 
-        return test;
+       // return test;
 
 
 }

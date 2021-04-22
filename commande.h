@@ -27,11 +27,13 @@
             void set_prix_unit(int PrixUnit){this->PrixUnit=PrixUnit;}
             void set_montant(int montant){this->montant=montant;}
 
-            bool ajouter_commande();                       
+            bool ajouter_commande();
+
             QSqlQueryModel* afficher();
             QSqlQueryModel* afficher_numero(int);
             QSqlQueryModel* afficher_ref(int);
             QSqlQueryModel* afficher_montant(int);
+
             bool modifier_commande(int);
             bool recherche_ref(int);
             bool recherche_numc(int);
