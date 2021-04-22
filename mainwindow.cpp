@@ -17,7 +17,7 @@
 #include <QVector2D>
 #include <QVector>
 #include <QSqlQuery>
-#include<QDesktopServices>
+//#include<QDesktopServices>
 #include <QMessageBox>
 #include<QUrl>
 #include <QPixmap>
