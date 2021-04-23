@@ -263,12 +263,12 @@ void MainWindow::on_pushButton_7_clicked()
             }
 
         }
-        else if(ui->comboBox->currentText()=="Rechercher par salaire")
+        else if(ui->comboBox_3->currentText()=="Rechercher par numero")
         {
             int num=ui->lineEdit->text().toInt();
             if(C.recherche_num(num))
             {
-                ui->table_commande->setModel(C.afficher_num(num));
+                ui->table_clients->setModel(C.afficher_num(num));
             }
         }
 }
@@ -396,7 +396,7 @@ void MainWindow::on_pushButton_14_clicked()
             }
 
         }
-        else if(ui->comboBox->currentText()=="Rechercher par montant")
+        else if(ui->comboBox->currentText()=="Recherche par montant")
         {
             int montant=ui->lineEdit_2->text().toInt();
             if(C.recherche_montant(montant))

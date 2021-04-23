@@ -109,7 +109,7 @@ bool commande::recherche_montant(int montant)
 
     QMessageBox msgBox;
     QSqlQuery query;
-    query.prepare("SELECT * FROM CLIENTS WHERE MONTANT= :montant");
+    query.prepare("SELECT * FROM COMMANDE WHERE MONTANT= :montant");
     query.bindValue(":montant", montant);
     if (query.exec() && query.next())
     {
@@ -156,7 +156,7 @@ QSqlQueryModel* commande::afficher_montant(int)
     QString m=QString::number(montant);
 
 
-          model->setQuery("SELECT * FROM COMMANDE WHERE NUMERO='"+m+"'");
+          model->setQuery("SELECT * FROM COMMANDE WHERE montant='"+m+"'");
 
     return model;
 }

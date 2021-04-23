@@ -106,9 +106,10 @@ bool clients::recherche_num(int)
 {
     QMessageBox msgBox;
     QSqlQuery query;
+    QString n=QString::number(num);
 
-    query.prepare("SELECT * FROM CLIENTS WHERE NUMERO= :num");
-    query.bindValue(":numero", num);
+    query.prepare("SELECT * FROM CLIENTS WHERE numero= :num");
+    query.bindValue(":num", n);
     if (query.exec() && query.next())
     {
             return true;

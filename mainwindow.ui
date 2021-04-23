@@ -15,6 +15,15 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="topMargin">
+     <number>9</number>
+    </property>
+    <property name="rightMargin">
+     <number>9</number>
+    </property>
+    <property name="bottomMargin">
+     <number>9</number>
+    </property>
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="styleSheet">
@@ -479,7 +488,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
 }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -495,7 +504,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          </rect>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -1574,6 +1583,11 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
          <zorder>pushButton_5</zorder>
         </widget>
        </widget>
+      </widget>
+      <widget class="QWidget" name="tab_11">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
       </widget>
      </widget>
     </item>
