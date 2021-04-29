@@ -68,7 +68,7 @@ bool commande::recherche_ref(int ref)
     QString ref_string=QString::number(ref);
 
     query.prepare("SELECT * FROM COMMANDE WHERE REF= :ref");
-    query.bindValue(":ref", ref_string);
+    query.bindValue(":ref", ref);
     if (query.exec() && query.next())
     {
             return true;

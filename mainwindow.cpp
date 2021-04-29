@@ -400,15 +400,7 @@ void MainWindow::on_pushButton_14_clicked()
                 ui->table_commande->setModel(Co.afficher_numero(numero));
             }
         }
-        else if(ui->comboBox->currentText()=="Recherche par reference")
-        {
-            int ref=ui->lineEdit_2->text().toInt();
-            if (C.recherche_ref(ref))
-            {
-                ui->table_commande->setModel(Co.afficher_ref(ref));
-            }
 
-        }
         else if(ui->comboBox->currentText()=="Recherche par montant")
         {
             int montant=ui->lineEdit_2->text().toInt();
@@ -416,6 +408,15 @@ void MainWindow::on_pushButton_14_clicked()
             {
                 ui->table_commande->setModel(Co.afficher_montant(montant));
             }
+        }
+        else
+        { (qDebug()<<"Test");
+            int ref=ui->lineEdit_2->text().toInt();
+            if (C.recherche_ref(ref))
+            {
+                ui->table_commande->setModel(Co.afficher_ref(ref));
+            }
+
         }
 }
 
