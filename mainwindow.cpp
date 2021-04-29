@@ -17,7 +17,6 @@
 #include <QVector2D>
 #include <QVector>
 #include <QSqlQuery>
-//#include<QDesktopServices>
 #include <QMessageBox>
 #include<QUrl>
 #include <QPixmap>
@@ -29,6 +28,13 @@
 #include <QValidator>
 #include <QIntValidator>
 #include <QRegExp>
+#include "smtp.h"
+#include "smtp.cpp"
+#include <QAbstractSocket>
+#include <QSslSocket>
+
+
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -45,6 +51,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->cinsupp->setValidator (new QIntValidator(0,99999999, this));
     ui->ref->setValidator (new QIntValidator(0,99999999, this));
     ui->refsupp->setValidator (new QIntValidator(0,99999999, this));
+
+    connect(ui->sendBtn, SIGNAL(clicked()),this, SLOT(sendMail()));
+    connect(ui->exitBtn, SIGNAL(clicked()),this, SLOT(close()));
+    connect(ui->browseBtn, SIGNAL(clicked()), this, SLOT(browse()));
 
     ui->table_clients->setModel(C.afficher());
     ui->table_commande->setModel(Co.afficher());
@@ -342,11 +352,11 @@ void MainWindow::on_pushButton_12_clicked()
        query.exec();
        while(query.next())
    {
-       ui->numeromodif->setText(query.value(1).toString());
-       ui->refmodif->setText(query.value(2).toString());
-       ui->quantitemodif->setValue(query.value(3).toString().toInt());
-       ui->PrixUnitmodif->setText(query.value(4).toString());
-       ui->montantmodif->setText(query.value(5).toString());
+       //ui->numeromodif->setText(query.value(1).toString());
+       ui->refmodif->setText(query.value(1).toString());
+       ui->quantitemodif->setValue(query.value(2).toString().toInt());
+       ui->PrixUnitmodif->setText(query.value(3).toString());
+       ui->montantmodif->setText(query.value(4).toString());
 
     }
    }
@@ -375,6 +385,9 @@ void MainWindow::on_pushButton_6_clicked()
 
     msg.exec();
 }
+
+
+
 
 void MainWindow::on_pushButton_14_clicked()
 {
@@ -405,6 +418,8 @@ void MainWindow::on_pushButton_14_clicked()
             }
         }
 }
+
+
 
 void MainWindow::on_pushButton_15_clicked()
 {
@@ -475,4 +490,44 @@ void MainWindow::on_pushButton_18_clicked()
 
         return;
 
+}
+
+
+
+
+void MainWindow::browse()
+{
+    files.clear();
+
+    QFileDialog dialog(this);
+    dialog.setDirectory(QDir::homePath());
+    dialog.setFileMode(QFileDialog::ExistingFiles);
+
+    if (dialog.exec())
+        files = dialog.selectedFiles();
+
+    QString fileListString;
+    foreach(QString file, files)
+        fileListString.append( "\"" + QFileInfo(file).fileName() + "\" " );
+
+    ui->file->setText( fileListString );
+
+}
+
+void MainWindow::sendMail()
+{
+    Smtp* smtp = new Smtp(ui->uname->text(), ui->paswd->text(), ui->server->text(), ui->port->text().toInt());
+    connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+    if( !files.isEmpty() )
+        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->text(), files );
+    else
+        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->text());
+}
+
+
+void MainWindow::mailSent(QString status)
+{
+    if(status == "Message sent")
+        QMessageBox::warning( 0, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
 }

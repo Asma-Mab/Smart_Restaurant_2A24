@@ -102,14 +102,14 @@ bool clients::recherche_nom(QString nom)
 
 
 
-bool clients::recherche_num(int)
+bool clients::recherche_num(int num)
 {
     QMessageBox msgBox;
     QSqlQuery query;
-    QString n=QString::number(num);
+    //QString n=QString::number(num);
 
     query.prepare("SELECT * FROM CLIENTS WHERE numero= :num");
-    query.bindValue(":num", n);
+    query.bindValue(":num", num);
     if (query.exec() && query.next())
     {
             return true;
@@ -171,7 +171,7 @@ QSqlQueryModel* clients::afficher_nom(QString nom)
 
 
 
-QSqlQueryModel* clients::afficher_num(int)
+QSqlQueryModel* clients::afficher_num(int num)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString num_string=QString::number(num);

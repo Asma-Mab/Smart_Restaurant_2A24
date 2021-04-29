@@ -65,9 +65,10 @@ bool commande::recherche_ref(int ref)
 {
     QMessageBox msgBox;
     QSqlQuery query;
+    QString ref_string=QString::number(ref);
 
     query.prepare("SELECT * FROM COMMANDE WHERE REF= :ref");
-    query.bindValue(":ref", ref);
+    query.bindValue(":ref", ref_string);
     if (query.exec() && query.next())
     {
             return true;
@@ -150,13 +151,13 @@ QSqlQueryModel* commande::afficher_ref(int ref)
 
 
 
-QSqlQueryModel* commande::afficher_montant(int)
+QSqlQueryModel* commande::afficher_montant(int montant)
 {
     QSqlQueryModel* model= new QSqlQueryModel();
     QString m=QString::number(montant);
 
 
-          model->setQuery("SELECT * FROM COMMANDE WHERE montant='"+m+"'");
+          model->setQuery("SELECT * FROM COMMANDE WHERE MONTANT='"+m+"'");
 
     return model;
 }
@@ -185,96 +186,3 @@ bool commande::modifier_commande(int ref)
     }
           return query.exec();
 }
-
-
-
-/*
-
-bool commande::modifier(int ref,int qte,int montant, int PrixUnit , QString designation)
-{
-QSqlQuery query;
-QString res = QString::number(ref);
-QString res1 = QString::number(qte);
-QString res2 = QString::number(PrixUnit);
-QString res3 = QString::number(montant);
-
-query.prepare("UPDATE COMMANDE SET QUANTITE= :qte, MONTANT= :montant, PRIXUNIT= :PrixUnit "
-                    " WHERE  REFERENCE = :ref ");
-
-
-query.bindValue(":ref", res);
-query.bindValue(":qte", res1);
-query.bindValue(":montant", res3);
-query.bindValue(":PrixUnit", res2);
-query.bindValue(":designation", designation);
-
-return    query.exec();
-}
-
-
-
-bool commande::supprimer_commande(int ref)
-{
-QSqlQuery query;
-QString res = QString::number(ref);
-query.prepare("Delete from commande where ref= :ref");
-query.bindValue(":ref",ref);
-return query.exec();
-}
-
-
-
-QSqlQueryModel * commande::trie_az()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from commande order by designation");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
-return model;
-}
-
-
-
-QSqlQueryModel * commande::trie_qte()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from commande order by qte");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
-return model;
-}
-
-
-
-QSqlQueryModel * commande::trie_mont()
-{
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("select * from commande order by montant");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
-return model;
-}
-QSqlQueryModel * commande::rechercher(QString res)
-{
-
-QSqlQueryModel * model=new QSqlQueryModel();
-model->setQuery("SELECT * from commande where ref ='"+res+"'");
-model->setHeaderData(1,Qt::Horizontal,QObject::tr("Designation"));
-model->setHeaderData(2,Qt::Horizontal,QObject::tr("Ref"));
-model->setHeaderData(3,Qt::Horizontal,QObject::tr("qte"));
-model->setHeaderData(4,Qt::Horizontal,QObject::tr("Prix unit"));
-model->setHeaderData(5,Qt::Horizontal,QObject::tr("montant"));
-return model;
-}
-
-
-*/

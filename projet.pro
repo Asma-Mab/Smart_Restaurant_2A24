@@ -1,7 +1,8 @@
-QT       += core gui
-
+QT       += core gui sql printsupport network
 QT       += sql
 QT += printsupport
+QT += multimedia
+QT += widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,14 +20,18 @@ SOURCES += \
     clients.cpp \
     commande.cpp \
     connection.cpp \
+    mailling.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    smtp.cpp
 
 HEADERS += \
     clients.h \
     commande.h \
     connection.h \
-    mainwindow.h
+    mailling.h \
+    mainwindow.h \
+    smtp.h
 
 FORMS += \
     mainwindow.ui

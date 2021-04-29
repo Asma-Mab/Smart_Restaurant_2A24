@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "clients.h"
 #include "commande.h"
+#include"smtp.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +20,12 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void sendMail();
+    void mailSent(QString);
+    void browse();
+
+
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
@@ -54,10 +62,16 @@ private slots:
 
     void on_pushButton_18_clicked();
 
+    void on_browseBtn_clicked();
+
+    void on_sendBtn_clicked();
+
 private:
     Ui::MainWindow *ui;
     clients C;
     commande Co;
+    QStringList files;
+
 };
 
 #endif // MAINWINDOW_H
