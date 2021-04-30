@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
+#include "QMainWindow"
 #include "clients.h"
 #include "commande.h"
 #include"smtp.h"
@@ -73,5 +73,4 @@ private:
     QStringList files;
 
 };
-
 #endif // MAINWINDOW_H
