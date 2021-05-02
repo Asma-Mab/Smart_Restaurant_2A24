@@ -1,220 +1,7 @@
-<<<<<<< HEAD
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "clients.h"
 #include "commande.h"
-#include <QMessageBox>
-#include <QIntValidator>
-#include <QSqlQueryModel>
-
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
-
-    ui->CIN->setValidator (new QIntValidator(0,999999999, this));
-    ui->cinsupp->setValidator (new QIntValidator(0,999999999, this));
-    ui->ref->setValidator (new QIntValidator(0,999999999, this));
-    ui->refsupp->setValidator (new QIntValidator(0,999999999, this));
-
-    ui->table_clients->setModel(C.afficher());
-    ui->table_commande->setModel(C1.afficher());
-
-   /* QLineEdit *edit = new QLineEdit(this);
-
-    // the edit lineedit will only accept integers between 100 and 999
-    edit->setValidator(validator);*/
-
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    int CIN=ui->CIN->text().toInt();
-    QString nom=ui->nom->text();
-    QString prenom=ui->prenom->text();
-    QString adresse=ui->adresse->text();
-    QString email=ui->email->text();
-    int num=ui->num->text().toInt();
-
-
-    clients C(CIN, nom, prenom, adresse, email, num);
-    bool test=C.ajouter();
-    QMessageBox msgBox;
-    if(test)
-  {
-    msgBox.setText("ajout avec succée");
-    ui->table_clients->setModel(C.afficher());
-    }
-
-    else
-        msgBox.setText("Echec d'ajout");
-    msgBox.exec();
-}
-
- void MainWindow::on_pushButton_3_clicked()
- {
-     if((ui->nommodif->text() != "") &&(ui->prenommodif->text() != "") &&(ui->adressemodif->text() != "") &&(ui->emailmodif->text() != "") &&(ui->nummodif->text() != ""))
-     {
-         if(C.modifier(ui->comboBox->currentText().toInt(),ui->nummodif->text().toInt(),ui->nommodif->text(),ui->prenommodif->text(),ui->adressemodif->text(),ui->emailmodif->text()))
-         {
-             //refresh combobox + tableau
-             ui->table_clients->setModel(C.afficher());}
-
-             //message
-             QMessageBox::information(this, QObject::tr("Modifier un client"),
-                         QObject::tr("client Modifier.\n"
-                                     "Click Cancel to exit."), QMessageBox::Cancel);
-         }
-         else
-         {
-             QMessageBox::critical(this, QObject::tr("client une reservation"),
-                         QObject::tr("Erreur !.\n"
-                                     "Click Cancel to exit."), QMessageBox::Cancel);
-         }
-
-
-     }
-
-
-
-
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    clients C; C.setCIN(ui->cinsupp->text().toInt());
-    bool test=C.supprimer(C.getCIN());
-    QMessageBox msgBox;
-    if(test)
-    {msgBox.setText("suppression avec succée");
-    ui->table_clients->setModel(C.afficher());}
-    else
-        msgBox.setText("Echec de suppression");
-    msgBox.exec();
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    int qte=ui->qte->text().toInt();
-    int ref=ui->ref->text().toInt();
-    int montant=ui->montant->text().toInt();
-    int PrixUnit =ui->prixUnitaire->text().toInt();
-    QString designation=ui->designation->text();
-
-
-    commande C1(designation, qte, ref, montant, PrixUnit);
-    bool test1=C1.ajouter_commande();
-    QMessageBox msgBox;
-    if(test1)
-      {
-      msgBox.setText("ajout avec succée");
-      ui->table_commande->setModel(C1.afficher());
-    }
-
-    else
-        msgBox.setText("Echec d'ajout");
-    msgBox.exec();
-}
-
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    commande C1; C1.set_ref(ui->refsupp->text().toInt());
-    bool test=C1.supprimer_commande(C1.get_ref());
-    QMessageBox msgBox;
-    if(test)
-    {msgBox.setText("suppression avec succée");
-    ui->table_commande->setModel(C1.afficher());}
-    else
-        msgBox.setText("Echec de suppression");
-    msgBox.exec();
-}
-
-void MainWindow::on_comboBox_activated(const QString &arg1)
-{
-    {
-        QSqlQuery query;
-
-        QString CIN = ui->comboBox->currentText();
-
-        query =C.request(CIN);
-        if(query.exec())
-        {
-            while(query.next())
-            {
-                ui->nommodif->setText(query.value(2).toString());
-                ui->prenommodif->setText(query.value(3).toString());
-                ui->adressemodif->setText(query.value(4).toString());
-                ui->emailmodif->setText(query.value(5).toString());
-                ui->nummodif->setText(query.value(6).toString());
-
-
-            }
-        }
-
-    }
-}
-
-void MainWindow::on_comboBox_2_activated(const QString &arg1)
-    {
-        {
-            QSqlQuery query;
-
-            QString ref = ui->comboBox_2->currentText();
-
-            query =C1.request(ref);
-            if(query.exec())
-            {
-                while(query.next())
-                {
-                    ui->designationmodif->setText(query.value(1).toString());
-                    ui->PrixUnitmodif->setText(query.value(4).toString());
-                    ui->montantmodif->setText(query.value(5).toString());
-
-
-                }
-            }
-
-        }
-    }
-
-
-void MainWindow::on_pushButton_6_clicked()
-{
-    if((ui->designationmodif->text() != "") &&(ui->PrixUnitmodif->text() != "") &&(ui->montantmodif->text() != ""))
-    {
-        if(C1.modifier(ui->PrixUnitmodif->text().toInt(),ui->montantmodif->text().toInt(),ui->quantitemodif->text().toInt(),ui->comboBox_2->currentText().toInt(),ui->designationmodif->text()))
-        {
-            //refresh combobox + tableau
-            ui->table_commande->setModel(C1.afficher());}
-
-            //message
-            QMessageBox::information(this, QObject::tr("Modifier une commande"),
-                        QObject::tr("commande Modifier.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-        }
-        else
-        {
-            QMessageBox::critical(this, QObject::tr("Modifier une commande"),
-                        QObject::tr("Erreur !.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-        }
-
-
-    }
-
-=======
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include "employe.h"
-#include "poste.h"
 #include <QMessageBox>
 #include <iostream>
 #include <QMessageBox>
@@ -230,7 +17,6 @@ void MainWindow::on_pushButton_6_clicked()
 #include <QVector2D>
 #include <QVector>
 #include <QSqlQuery>
-#include<QDesktopServices>
 #include <QMessageBox>
 #include<QUrl>
 #include <QPixmap>
@@ -242,25 +28,13 @@ void MainWindow::on_pushButton_6_clicked()
 #include <QValidator>
 #include <QIntValidator>
 #include <QRegExp>
-#include <QTabWidget>
-
-
 #include "smtp.h"
 #include "smtp.cpp"
-#include <QThread>
-#include <QPixmap>
-#include <QMessageBox>
-#include <QTimer>
-#include <QDate>
-//#include <SmtpMime>
-#include <QDateTime>
-#include <QPlainTextEdit>
-#include <QPlainTextEdit>
-#include <QTextEdit>
-#include <QComboBox>
-#include <QTextBrowser>
-#include <QIntValidator>
 #include <QAbstractSocket>
+#include <QSslSocket>
+
+
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -273,12 +47,21 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("~~Smart Restaurant~~");
 
 
-    ui->cin1->setValidator (new QIntValidator(0,99999999, this));
-    ui->cin3->setValidator (new QIntValidator(0,99999999, this));
+    ui->CIN->setValidator (new QIntValidator(0,99999999, this));
+    ui->cinsupp->setValidator (new QIntValidator(0,99999999, this));
+    ui->ref->setValidator (new QIntValidator(0,99999999, this));
+    ui->refsupp->setValidator (new QIntValidator(0,99999999, this));
 
-    ui->tableemploye->setModel(E.afficher());
-    ui->tablepostes->setModel(P.afficher());
-}
+    connect(ui->sendBtn, SIGNAL(clicked()),this, SLOT(sendMail()));
+    connect(ui->exitBtn, SIGNAL(clicked()),this, SLOT(close()));
+    connect(ui->browseBtn, SIGNAL(clicked()), this, SLOT(browse()));
+
+    ui->table_clients->setModel(C.afficher());
+    ui->table_commande->setModel(Co.afficher());
+    }
+
+
+
 
 MainWindow::~MainWindow()
 {
@@ -286,23 +69,23 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_ajouter_clicked()
+void MainWindow::on_pushButton_2_clicked()
 {
-    int cin=ui->cin1->text().toInt();
-    int num=ui->num1->text().toInt();
-    QString nom=ui->nom1->text();
-    QString prenom=ui->prenom1->text();
-    QString adresse=ui->adresse1->text();
-    QString email=ui->email1->text();
+    int CIN=ui->CIN->text().toInt();
+    int num=ui->num->text().toInt();
+    QString nom=ui->nom->text();
+    QString prenom=ui->prenom->text();
+    QString adresse=ui->adresse->text();
+    QString email=ui->email->text();
 
 
-    employe E(cin, num, nom, prenom, adresse, email);
-    bool test=E.ajouter();
+    clients C(CIN, num, nom, prenom, adresse, email);
+    bool test=C.ajouter();
     QMessageBox msgBox;
     if(test)
   {
-    msgBox.setText("ajout avec succès");
-    ui->tableemploye->setModel(E.afficher());
+    msgBox.setText("ajout avec succée");
+    ui->table_clients->setModel(C.afficher());
     }
 
     else
@@ -312,66 +95,100 @@ void MainWindow::on_ajouter_clicked()
 
 
 
-void MainWindow::on_rechercher_clicked()
+void MainWindow::on_pushButton_clicked()
 {
-    employe E;
-        if (ui->Recherche->currentText()=="Rechercher par CIN")
-        {
-            int cin=ui->lineEdit_17->text().toInt();
-            if (E.recherche_cin(cin))
-            {
-                ui->tableemploye->setModel(E.afficher_cin(cin));
-            }
-        }
-        else if(ui->Recherche->currentText()=="Rechercher par nom")
-        {
-            QString nom=ui->lineEdit_17->text();
-            if (E.recherche_nom(nom))
-            {
-                ui->tableemploye->setModel(E.afficher_nom(nom));
-            }
+    int numero=ui->numero->text().toInt();
+    int ref=ui->ref->text().toInt();
+    int qte=ui->qte->text().toInt();
+    int PrixUnit =ui->prixUnitaire->text().toInt();
+    int montant=ui->montant->text().toInt();
 
-        }
-        /*else if(ui->comboBox->currentText()=="Rechercher par numéro")
-        {
-            int num=ui->lineEdit->text().toInt();
-            if(C.recherche_num(num))
-            {
-                ui->table_commande->setModel(C.afficher_num(num));
-            }
-        }*/
-}
 
-void MainWindow::on_supprimer_clicked()
-{
+    commande Co (numero, ref, qte, PrixUnit, montant);
+    bool test1=Co.ajouter_commande();
     QMessageBox msgBox;
-    employe E1;
-    E1.setcin(ui->cin3->text().toInt());
-    bool test=E1.supprimer(E1.getcin());
-    if (test){
-        ui->cin3->clear();
-        ui->tableemploye->setModel(E.afficher());
-            msgBox.setText("employe supprimé");
-            msgBox.exec();
-           }
+    if(test1)
+      {
+      msgBox.setText("ajout avec succée");
+      ui->table_commande->setModel(Co.afficher());
+    }
+
+    else
+        msgBox.setText("Echec d'ajout");
+    msgBox.exec();
 }
 
-void MainWindow::on_modifier_clicked()
-{
-    employe E;
-    QMessageBox msg;
-    E.setcin(ui->cin2->text().toInt());
-    E.setnum(ui->num2->text().toInt());
-    E.setnom(ui->nom2->text());
-    E.setprenom(ui->prenom2->text());
-    E.setadresse(ui->adresse2->text());
-    E.setemail(ui->email2->text());
 
-    bool test=E.modifier(E.getcin());
+void MainWindow::on_pushButton_5_clicked()
+{
+    commande Co;
+    Co.set_ref(ui->refsupp->text().toInt());
+    bool test=Co.supprimer_commande(Co.get_ref());
+    QMessageBox msgBox;
+    if(test)
+    {msgBox.setText("suppression avec succée");
+    ui->table_commande->setModel(Co.afficher());}
+    else
+        msgBox.setText("Echec de suppression");
+    msgBox.exec();
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+        QMessageBox msgBox;
+        clients C1;
+        C1.setcin(ui->cinsupp->text().toInt());
+        bool test=C1.supprimer(C1.getcin());
+        if (test){
+            ui->cinsupp->clear();
+            ui->table_clients->setModel(C.afficher());
+                msgBox.setText("clients supprimé");
+                msgBox.exec();
+               }
+    }
+
+
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    clients C;
+    QSqlQuery query;
+    int cin=ui->cinmodif->text().toInt();
+    QString cin_string=QString::number(cin);
+   if(C.recherche_cin(cin))
+   {
+       query.prepare("SELECT * FROM CLIENTS WHERE cin like :cin");
+       query.bindValue(0,cin_string);
+       query.exec();
+       while(query.next())
+   {
+       ui->nummodif->setText(query.value(5).toString());
+       ui->nommodif->setText(query.value(2).toString());
+       ui->prenommodif->setText(query.value(3).toString());
+       ui->adressemodif->setText(query.value(4).toString());
+       ui->emailmodif->setText(query.value(1).toString());
+
+    }
+   }
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    clients C;
+    QMessageBox msg;
+    C.setcin(ui->cinmodif->text().toInt());
+    C.setnum(ui->nummodif->text().toInt());
+    C.setnom(ui->nommodif->text());
+    C.setprenom(ui->prenommodif->text());
+    C.setadresse(ui->adressemodif->text());
+    C.setemail(ui->emailmodif->text());
+
+    bool test=C.modifier(C.getcin());
     if(test)
     {
         msg.setText("modification avec succès");
-        ui->tableemploye->setModel(E.afficher());
+        ui->table_clients->setModel(C.afficher());
     }
     else
         msg.setText("echec de modification");
@@ -379,72 +196,50 @@ void MainWindow::on_modifier_clicked()
     msg.exec();
 }
 
-void MainWindow::on_recherchemodif_clicked()
+void MainWindow::on_pushButton_8_clicked()
 {
-    employe E;
-    QSqlQuery query;
-    int cin=ui->cin2->text().toInt();
-    QString cin_string=QString::number(cin);
-   if(E.recherche_cin(cin))
-   {
-       query.prepare("SELECT * FROM EMPLOYE WHERE cin like :cin");
-       query.bindValue(0,cin_string);
-       query.exec();
-       while(query.next())
-   {
-       ui->num2->setText(query.value(5).toString());
-       ui->nom2->setText(query.value(2).toString());
-       ui->prenom2->setText(query.value(3).toString());
-       ui->adresse2->setText(query.value(4).toString());
-       ui->email2->setText(query.value(1).toString());
 
-    }
-   }
+  QMessageBox msgBox ;
+
+QSqlQueryModel *model = new QSqlQueryModel();
+         model->setQuery("SELECT * FROM CLIENTS order by CIN ASC");
+         model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
+         model->setHeaderData(1, Qt::Horizontal, QObject::tr("Numero"));
+         model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
+         model->setHeaderData(3, Qt::Horizontal, QObject::tr("Prenom"));
+         model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
+         model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
+         ui->table_clients->setModel(model);
+         //ui->table_clients->setModel(C.afficher());
+         ui->table_clients->show();
+         msgBox.setText("Tri avec succès.");
+         msgBox.exec();
 }
 
-void MainWindow::on_tricin_clicked()
-{
-    QMessageBox msgBox ;
-
-  QSqlQueryModel *model = new QSqlQueryModel();
-           model->setQuery("SELECT * FROM EMPLOYE order by CIN ASC");
-           model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
-           model->setHeaderData(1, Qt::Horizontal, QObject::tr("Numero"));
-           model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
-           model->setHeaderData(3, Qt::Horizontal, QObject::tr("Prenom"));
-           model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
-           model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
-           ui->tableemploye->setModel(model);
-           //ui->table_clients->setModel(E.afficher());
-           ui->tableemploye->show();
-           msgBox.setText("Tri avec succès.");
-           msgBox.exec();
-}
-
-void MainWindow::on_trinom_clicked()
+void MainWindow::on_pushButton_9_clicked()
 {
     QMessageBox msgBox ;
 
     QSqlQueryModel *model = new QSqlQueryModel();
-             model->setQuery("SELECT * FROM EMPLOYE order by nom ASC");
+             model->setQuery("SELECT * FROM CLIENTS order by nom ASC");
              model->setHeaderData(0, Qt::Horizontal, QObject::tr("Cin"));
              model->setHeaderData(1, Qt::Horizontal, QObject::tr("Numero"));
              model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
              model->setHeaderData(3, Qt::Horizontal, QObject::tr("Prenom"));
              model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
              model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
-             ui->tableemploye->setModel(model);
-             ui->tableemploye->show();
+             ui->table_clients->setModel(model);
+             ui->table_clients->show();
              msgBox.setText("Tri avec succès.");
              msgBox.exec();
 }
 
-void MainWindow::on_trinum_clicked()
+void MainWindow::on_pushButton_10_clicked()
 {
     QMessageBox msgBox ;
 
     QSqlQueryModel *model = new QSqlQueryModel();
-             model->setQuery("SELECT * FROM EMPLOYE order by num ASC");
+             model->setQuery("SELECT * FROM CLIENTS order by numero ASC");
              model->setHeaderData(0, Qt::Horizontal, QObject::tr("Cin"));
              model->setHeaderData(1, Qt::Horizontal, QObject::tr("Numero"));
              model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
@@ -452,19 +247,49 @@ void MainWindow::on_trinum_clicked()
              model->setHeaderData(4, Qt::Horizontal, QObject::tr("Adresse"));
              model->setHeaderData(5, Qt::Horizontal, QObject::tr("Email"));
 
-             ui->tableemploye->setModel(model);
-             ui->tableemploye->show();
+             ui->table_clients->setModel(model);
+             ui->table_clients->show();
              msgBox.setText("Tri avec succès.");
              msgBox.exec();
 }
 
-void MainWindow::on_pdf_clicked()
+void MainWindow::on_pushButton_7_clicked()
+{
+    clients C;
+        if (ui->comboBox_3->currentText()=="Rechercher par CIN")
+        {
+            int cin=ui->lineEdit->text().toInt();
+            if (C.recherche_cin(cin))
+            {
+                ui->table_clients->setModel(C.afficher_cin(cin));
+            }
+        }
+        else if(ui->comboBox_3->currentText()=="Rechercher par nom")
+        {
+            QString nom=ui->lineEdit->text();
+            if (C.recherche_nom(nom))
+            {
+                ui->table_clients->setModel(C.afficher_nom(nom));
+            }
+
+        }
+        else if(ui->comboBox_3->currentText()=="Rechercher par numero")
+        {
+            int num=ui->lineEdit->text().toInt();
+            if(C.recherche_num(num))
+            {
+                ui->table_clients->setModel(C.afficher_num(num));
+            }
+        }
+}
+
+void MainWindow::on_pushButton_13_clicked()
 {
     QString strStream;
                   QTextStream out(&strStream);
 
-                  const int rowCount = ui->tableemploye->model()->rowCount();
-                  const int columnCount = ui->tableemploye->model()->columnCount();
+                  const int rowCount = ui->table_clients->model()->rowCount();
+                  const int columnCount = ui->table_clients->model()->columnCount();
 
                   out <<  "<html>\n"
                       "<head>\n"
@@ -479,16 +304,16 @@ void MainWindow::on_pdf_clicked()
                   // headers
                   out << "<thead><tr bgcolor=#f0f0f0> <th>Numero</th>";
                   for (int column = 0; column < columnCount; column++)
-                      if (!ui->tableemploye->isColumnHidden(column))
-                          out << QString("<th>%1</th>").arg(ui->tableemploye->model()->headerData(column, Qt::Horizontal).toString());
+                      if (!ui->table_clients->isColumnHidden(column))
+                          out << QString("<th>%1</th>").arg(ui->table_clients->model()->headerData(column, Qt::Horizontal).toString());
                   out << "</tr></thead>\n";
 
                   // data table
                   for (int row = 0; row < rowCount; row++) {
                       out << "<tr> <td bkcolor=0>" << row+1 <<"</td>";
                       for (int column = 0; column < columnCount; column++) {
-                          if (!ui->tableemploye->isColumnHidden(column)) {
-                              QString data = ui->tableemploye->model()->data(ui->tableemploye->model()->index(row, column)).toString().simplified();
+                          if (!ui->table_clients->isColumnHidden(column)) {
+                              QString data = ui->table_clients->model()->data(ui->table_clients->model()->index(row, column)).toString().simplified();
                               out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
                           }
                       }
@@ -512,7 +337,148 @@ void MainWindow::on_pdf_clicked()
               doc.print(&printer);
 }
 
-void MainWindow::on_imprimer_clicked()
+
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    commande C1;
+    QSqlQuery query;
+    int numero=ui->numeromodif->text().toInt();
+    QString num=QString::number(numero);
+   if(C1.recherche_numc(numero))
+   {
+       query.prepare("SELECT * FROM COMMANDE WHERE NUMERO like :numero");
+       query.bindValue(0,num);
+       query.exec();
+       while(query.next())
+   {
+       //ui->numeromodif->setText(query.value(1).toString());
+       ui->refmodif->setText(query.value(1).toString());
+       ui->quantitemodif->setValue(query.value(2).toString().toInt());
+       ui->PrixUnitmodif->setText(query.value(3).toString());
+       ui->montantmodif->setText(query.value(4).toString());
+
+    }
+   }
+}
+
+
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    commande C;
+    QMessageBox msg;
+    C.set_numero(ui->numeromodif->text().toInt());
+    C.set_ref(ui->refmodif->text().toInt());
+    C.set_qte(ui->quantitemodif->text().toInt());
+    C.set_prix_unit(ui->PrixUnitmodif->text().toInt());
+    C.set_montant(ui->montantmodif->text().toInt());
+
+    bool test=C.modifier_commande(C.get_numero());
+    if(test)
+    {
+        msg.setText("modification avec succès");
+        ui->table_commande->setModel(Co.afficher());
+    }
+    else
+        msg.setText("echec de modification");
+
+    msg.exec();
+}
+
+
+
+
+void MainWindow::on_pushButton_14_clicked()
+{
+    commande C;
+        if (ui->comboBox->currentText()=="Recherche par numero")
+        {
+            int numero=ui->lineEdit_2->text().toInt();
+            if (C.recherche_numc(numero))
+            {
+                ui->table_commande->setModel(Co.afficher_numero(numero));
+            }
+        }
+        else if(ui->comboBox->currentText()=="Recherche par reference")
+        {
+            int ref=ui->lineEdit_2->text().toInt();
+            if (C.recherche_ref(ref))
+            {
+                ui->table_commande->setModel(Co.afficher_ref(ref));
+            }
+
+        }
+        else if(ui->comboBox->currentText()=="Recherche par montant")
+        {
+            int montant=ui->lineEdit_2->text().toInt();
+            if(C.recherche_montant(montant))
+            {
+                ui->table_commande->setModel(Co.afficher_montant(montant));
+            }
+        }
+}
+
+
+
+void MainWindow::on_pushButton_15_clicked()
+{
+    QMessageBox msgBox ;
+
+  QSqlQueryModel *model = new QSqlQueryModel();
+           model->setQuery("SELECT * FROM COMMANDE order by REF ASC");
+           model->setHeaderData(0,Qt::Horizontal,QObject::tr("numero"));
+           model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
+           model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
+           model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
+           model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+           ui->table_commande->setModel(model);
+           //ui->table_clients->setModel(C.afficher());
+           ui->table_commande->show();
+           msgBox.setText("Tri avec succès.");
+           msgBox.exec();
+}
+
+void MainWindow::on_pushButton_16_clicked()
+{
+
+    QMessageBox msgBox ;
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+             model->setQuery("SELECT * FROM COMMANDE order by NUMERO ASC");
+             model->setHeaderData(0,Qt::Horizontal,QObject::tr("numero"));
+             model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
+             model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
+             model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
+             model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+             ui->table_commande->setModel(model);
+             ui->table_commande->show();
+             msgBox.setText("Tri avec succès.");
+             msgBox.exec();
+}
+
+void MainWindow::on_pushButton_17_clicked()
+{
+    QMessageBox msgBox ;
+
+    QSqlQueryModel *model = new QSqlQueryModel();
+             model->setQuery("SELECT * FROM COMMANDE order by MONTANT ASC");
+             model->setHeaderData(0,Qt::Horizontal,QObject::tr("numero"));
+             model->setHeaderData(1,Qt::Horizontal,QObject::tr("Ref"));
+             model->setHeaderData(2,Qt::Horizontal,QObject::tr("qte"));
+             model->setHeaderData(3,Qt::Horizontal,QObject::tr("Prix unit"));
+             model->setHeaderData(4,Qt::Horizontal,QObject::tr("montant"));
+             ui->table_commande->setModel(model);
+             ui->table_commande->show();
+             msgBox.setText("Tri avec succès.");
+             msgBox.exec();
+}
+
+
+
+
+
+void MainWindow::on_pushButton_18_clicked()
 {
     QPrinter printer;
 
@@ -523,27 +489,13 @@ void MainWindow::on_imprimer_clicked()
     if(dialog.exec()== QDialog::Rejected)
 
         return;
-}
-
-void MainWindow::on_trisalaire_clicked()
-{
-    ui->tablepostes->setModel(P.trisalaire());
 
 }
 
-void MainWindow::on_trinbheures_clicked()
-{
-    ui->tablepostes->setModel(P.tritype());
-}
-
-void MainWindow::on_trimatricule_clicked()
-{
-     ui->tablepostes->setModel(P.tri_matricule());
-}
 
 
 
-void MainWindow::on_browseBtn_clicked()
+void MainWindow::browse()
 {
     files.clear();
 
@@ -562,81 +514,20 @@ void MainWindow::on_browseBtn_clicked()
 
 }
 
-void MainWindow::on_sendBtn_clicked()
+void MainWindow::sendMail()
 {
-    QMessageBox msg;
     Smtp* smtp = new Smtp(ui->uname->text(), ui->paswd->text(), ui->server->text(), ui->port->text().toInt());
     connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
 
     if( !files.isEmpty() )
-        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->toPlainText(), files );
+        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->text(), files );
     else
-        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->toPlainText());
-
-
-        msg.setText("Envoi avec succès");
-
-        msg.setText("echec de'envoi");
-
-    msg.exec();
+        smtp->sendMail(ui->uname->text(), ui->rcpt->text() , ui->subject->text(),ui->msg->text());
 }
 
 
-void MainWindow::on_recherchermatricule_clicked()
+void MainWindow::mailSent(QString status)
 {
-
-    poste P;
-    QSqlQuery query;
-    int matricule=ui->matricule2->text().toInt();
-    QString matricule_string=QString::number(matricule);
-   if(P.recherche_matricule(matricule))
-   {
-       query.prepare("SELECT * FROM POSTE WHERE matricule like :matricule");
-       query.bindValue(0,matricule_string);
-       query.exec();
-       while(query.next())
-   {
-       ui->type2->setText(query.value(3).toString());
-       ui->salaire2->setText(query.value(2).toString());
-       ui->nb_heures2->setText(query.value(1).toString());
-       ///chwaya chak nzid to int walle
-    }
-   }
+    if(status == "Message sent")
+        QMessageBox::warning( 0, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
 }
-
-void MainWindow::on_modifier2_clicked()
-{
-    poste P;
-    QMessageBox msg;
-    P.setmatricule(ui->matricule2->text().toInt());
-    P.settype(ui->type2->text());
-    P.setsalaire(ui->salaire2->text().toInt());
-    P.setnb_heures(ui->nb_heures2->text().toInt());
-
-    bool test=P.modifier(P.getmatricule());
-    if(test)
-    {
-        msg.setText("modification avec succès");
-        ui->tablepostes->setModel(P.afficher());
-    }
-    else
-        msg.setText("echec de modification");
-
-    msg.exec();
-}
-
-
-void MainWindow::on_supprimer2_clicked()
-{
-    QMessageBox msgBox;
-    poste P1;
-    P1.setmatricule(ui->matricule3->text().toInt());
-    bool test=P1.supprimer(P1.getmatricule());
-    if (test){
-        ui->cin3->clear();
-        ui->tablepostes->setModel(P.afficher());
-            msgBox.setText("employe supprimé");
-            msgBox.exec();
-           }
-}
->>>>>>> d2af1979e479e0def15bf13fc7db15f4007ed023
