@@ -32,8 +32,8 @@ bool PRODUITS::ajouter()
 QSqlQuery query;
 QString res= QString::number(id);
 query.prepare("INSERT INTO produits (ID,NOM,TYPE,PRIX,DESCRIPTION) "
-                    "VALUES (:ID,:nom,:type,:prix,:description)");
-query.bindValue(":id", res);
+                    "VALUES (:id,:nom,:type,:prix,:description)");
+query.bindValue(":id", id);
 query.bindValue(":nom", nom);
 query.bindValue(":type", type);
 query.bindValue(":prix", prix);

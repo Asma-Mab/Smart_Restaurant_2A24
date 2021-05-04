@@ -8,6 +8,7 @@
 #include <QTextDocument>
 #include <QPrintDialog>
 #include <QTextStream>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,6 +42,7 @@ sound->play();
     int id=ui->lineEdit_ideFRMTIONADD->text().toInt();
     QString nom=ui->lineEdit_NOMFRMTSADD->text();
     QString type=ui->lineEdit_DOMAINEADDFRMTS->text();
+    qDebug()<<id;
     QString prix=ui->lineEdit_depart_add->text();
     QString description=ui->description->text();
     PRODUITS f(id,nom,prix,type,description);
@@ -223,7 +225,7 @@ void MainWindow:: on_pdf_tions_clicked()
                    out <<  "<html>\n"
                            "<head>\n"
                            "<meta Content=\"Text/html; charset=Windows-1251\">\n"
-                           <<  QString("<title>%1</title>\n").arg("FORMATION")
+                           <<  QString("<title>%1</title>\n").arg("PRODUITS")
                            <<  "</head>\n"
                            "<body bgcolor=#ffffff link=#5000A0>\n"
                                "<img src='C:/Users/lenovo/Desktop/malthus/proj_c2a/image/53378.png' width='100' height='100'>\n"
@@ -278,10 +280,10 @@ void MainWindow::on_pdf_teurs_clicked()
                    out <<  "<html>\n"
                            "<head>\n"
                            "<meta Content=\"Text/html; charset=Windows-1251\">\n"
-                           <<  QString("<title>%1</title>\n").arg("FORMATEUR")
+                           <<  QString("<title>%1</title>\n").arg("PROMOTIONS")
                            <<  "</head>\n"
                            "<body bgcolor=#ffffff link=#5000A0>\n"
-                               "<img src='C:/Users/lenovo/Desktop/malthus/proj_c2a/image/53378.png' width='100' height='100'>\n"
+
                                "<h1>Liste des promotions </h1>"
 
 

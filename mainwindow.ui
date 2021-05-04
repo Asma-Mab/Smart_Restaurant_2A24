@@ -585,7 +585,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
       <string notr="true">opacity: 0.5;</string>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab_9">
       <attribute name="title">
@@ -606,7 +606,7 @@ color:rgb(0, 0, 0)
 }</string>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <property name="tabBarAutoHide">
         <bool>true</bool>
@@ -1277,8 +1277,8 @@ background-color: rgb(255,165,0,0.5);
       <widget class="QTabWidget" name="tabWidget_3">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>10</y>
+         <x>20</x>
+         <y>30</y>
          <width>581</width>
          <height>271</height>
         </rect>
@@ -1408,24 +1408,6 @@ border-radius: 8px;
 }</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit_dom_add_teurs">
-         <property name="geometry">
-          <rect>
-           <x>90</x>
-           <y>130</y>
-           <width>113</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-padding: 1px;
-border-style: solid;
-border: 2px solid gray;
-border-radius: 8px;
-}</string>
-         </property>
-        </widget>
         <widget class="QPushButton" name="pushButton_add_teurs">
          <property name="geometry">
           <rect>
@@ -1501,14 +1483,14 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Pourcentages</string>
+          <string>Pourcentage</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="datef_add">
+        <widget class="QLineEdit" name="pourc_add">
          <property name="geometry">
           <rect>
            <x>90</x>
-           <y>170</y>
+           <y>210</y>
            <width>113</width>
            <height>20</height>
           </rect>
@@ -1522,13 +1504,31 @@ border-radius: 8px;
 }</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="pourc_add">
+        <widget class="QDateEdit" name="lineEdit_dom_add_teurs">
          <property name="geometry">
           <rect>
            <x>90</x>
-           <y>210</y>
-           <width>113</width>
-           <height>20</height>
+           <y>130</y>
+           <width>111</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+padding: 1px;
+border-style: solid;
+border: 2px solid gray;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+        <widget class="QDateEdit" name="datef_add">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>170</y>
+           <width>111</width>
+           <height>22</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -1659,7 +1659,7 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Nouveau Type</string>
+          <string>Nouveau Debut</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_13">
@@ -1685,7 +1685,7 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Nouveau Debut</string>
+          <string>Nouveau Type</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="lineEdit_id_mod_teur">
@@ -1693,24 +1693,6 @@ color:rgb(255, 255, 255);
           <rect>
            <x>150</x>
            <y>30</y>
-           <width>121</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-padding: 1px;
-border-style: solid;
-border: 2px solid gray;
-border-radius: 8px;
-}</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="lineEdit_nom_mod_teurs">
-         <property name="geometry">
-          <rect>
-           <x>150</x>
-           <y>80</y>
            <width>121</width>
            <height>21</height>
           </rect>
@@ -1791,25 +1773,7 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Nouvelle  Fin</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="nvf_mod">
-         <property name="geometry">
-          <rect>
-           <x>150</x>
-           <y>170</y>
-           <width>121</width>
-           <height>21</height>
-          </rect>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-padding: 1px;
-border-style: solid;
-border: 2px solid gray;
-border-radius: 8px;
-}</string>
+          <string>Nouvelle Fin</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_24">
@@ -1854,6 +1818,26 @@ border-style: solid;
 border: 2px solid gray;
 border-radius: 8px;
 }</string>
+         </property>
+        </widget>
+        <widget class="QDateEdit" name="lineEdit_nom_mod_teurs">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>80</y>
+           <width>121</width>
+           <height>22</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QDateEdit" name="nvf_mod">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>170</y>
+           <width>121</width>
+           <height>22</height>
+          </rect>
          </property>
         </widget>
        </widget>

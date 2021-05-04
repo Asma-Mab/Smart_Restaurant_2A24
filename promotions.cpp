@@ -31,9 +31,9 @@ bool PROMOTIONS::ajouter()
 {
 QSqlQuery query;
 QString res= QString::number(id);
-query.prepare("INSERT INTO produits (ID,TYPE,DATED,DATEF,POURCENTAGE) "
-                    "VALUES (:ID,:type,:dated,:datef,:pourcentage)");
-query.bindValue(":id", res);
+query.prepare("INSERT INTO promotions (ID,TYPE,DATED,DATEF,POURCENTAGE) "
+                    "VALUES (:id,:type,:dated,:datef,:pourcentage)");
+query.bindValue(":id", id);
 query.bindValue(":type", type);
 query.bindValue(":dated", dated);
 query.bindValue(":datef", datef);

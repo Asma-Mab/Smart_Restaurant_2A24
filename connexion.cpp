@@ -12,11 +12,12 @@ Connexion::Connexion()
 bool Connexion::ouvrirConnexion()
 {bool test=false;
 QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
-db.setDatabaseName("test");
+db.setDatabaseName("test2");
     db.setUserName("system");
     db.setPassword("752841");
-    db.open();
+   if (db.open())
     test=true;
+   qDebug() << db.lastError();
 
 return  test;
 }

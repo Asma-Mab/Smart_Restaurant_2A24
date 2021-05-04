@@ -1,9 +1,11 @@
 QT += core gui sql charts multimedia
 QT += printsupport
 QT       += core gui sql serialport
+QT+= sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += console
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
