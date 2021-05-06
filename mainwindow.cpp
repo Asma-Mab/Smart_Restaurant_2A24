@@ -9,6 +9,7 @@
 #include <QPrintDialog>
 #include <QTextStream>
 #include <QDebug>
+#include<QDesktopServices>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("SMART RESTAURANT");
     setWindowIcon(QIcon(":/53378.png"));
-    QPixmap bg(":/black.jpg");
+    QPixmap bg(":/image/black.jpg");
     ui->label_20->setPixmap(bg);
     ui->tableView_2->setModel(tmpPRODUITS.afficher());
      ui->tableView_2->setModel(tmpPRODUITS.afficher2());
@@ -320,6 +321,7 @@ void MainWindow::on_pdf_teurs_clicked()
               // document.setHtml(html);
                QPrinter printer(QPrinter::PrinterResolution);
                printer.setOutputFormat(QPrinter::PdfFormat);
-               printer.setOutputFileName("Formateurs.pdf");
+               printer.setOutputFileName("Promotions.pdf");
                document->print(&printer);
+
 }

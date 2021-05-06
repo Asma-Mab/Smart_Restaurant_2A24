@@ -585,7 +585,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
       <string notr="true">opacity: 0.5;</string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_9">
       <attribute name="title">
@@ -606,7 +606,7 @@ color:rgb(0, 0, 0)
 }</string>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="tabBarAutoHide">
         <bool>true</bool>
@@ -664,7 +664,7 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Type</string>
+          <string>Prix</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="lineEdit_ideFRMTIONADD">
@@ -770,7 +770,7 @@ color:rgb(255, 255, 255);
 </string>
          </property>
          <property name="text">
-          <string>Prix</string>
+          <string>Type</string>
          </property>
         </widget>
         <widget class="QLineEdit" name="lineEdit_depart_add">
@@ -2096,7 +2096,7 @@ color:rgb(0, 0, 0)
          <property name="geometry">
           <rect>
            <x>170</x>
-           <y>10</y>
+           <y>80</y>
            <width>191</width>
            <height>91</height>
           </rect>
@@ -2122,38 +2122,6 @@ background-color: rgb(255,165,0,0.5);
          </property>
          <property name="text">
           <string>Generer Liste </string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pdf_tions_2">
-         <property name="geometry">
-          <rect>
-           <x>170</x>
-           <y>150</y>
-           <width>191</width>
-           <height>91</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Times New Roman</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">*{
-color:rgb(255, 255, 255);
-
-}
-QPushButton {
-border-radius: 10px;
-background-color: orange;
-}
-QPushButton:hover{
-background-color: rgb(255,165,0,0.5);
-}</string>
-         </property>
-         <property name="text">
-          <string>Generer statistiques</string>
          </property>
         </widget>
        </widget>
@@ -2164,8 +2132,8 @@ background-color: rgb(255,165,0,0.5);
         <widget class="QPushButton" name="pdf_teurs">
          <property name="geometry">
           <rect>
-           <x>170</x>
-           <y>10</y>
+           <x>160</x>
+           <y>70</y>
            <width>191</width>
            <height>91</height>
           </rect>
@@ -2191,38 +2159,6 @@ background-color: rgb(255,165,0,0.5);
          </property>
          <property name="text">
           <string>Generer Liste </string>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="pdf_teurs_2">
-         <property name="geometry">
-          <rect>
-           <x>170</x>
-           <y>160</y>
-           <width>191</width>
-           <height>91</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>Times New Roman</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">*{
-color:rgb(255, 255, 255);
-
-}
-QPushButton {
-border-radius: 10px;
-background-color: orange;
-}
-QPushButton:hover{
-background-color: rgb(255,165,0,0.5);
-}</string>
-         </property>
-         <property name="text">
-          <string>Generer statistique</string>
          </property>
         </widget>
        </widget>

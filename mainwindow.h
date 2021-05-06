@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
 PRODUITS f , *fs;
 PROMOTIONS g , *gs;
 QString ch;
-  QSound *sound= new QSound(":/click.wav");
+  QSound *sound= new QSound(":/image/click.wav");
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
