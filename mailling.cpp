@@ -1,4 +1,4 @@
-#include "mailling.h"
+#include "mailing.h"
 
 mailing::mailing( const QString &user, const QString &pass, const QString &host, int port, int timeout )
 {
